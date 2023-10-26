@@ -1,6 +1,7 @@
 import pytest
 from modules.api.clients.github import GitHub
 from modules.api.clients.pokemon import Pokemon
+from modules.common.database import Database
 
 
 class User:
@@ -35,3 +36,8 @@ def github_api():
 def pokemon_api():
     api = Pokemon()
     yield api
+
+@pytest.fixture
+def database():
+    db = Database()
+    yield db
