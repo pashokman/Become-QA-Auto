@@ -44,8 +44,8 @@ def test_product_delete(database):
 def test_detailed_orders(database):
     orders = database.get_detailed_orders()
     print("Замовлення:", orders)
-    # Check quantity of orders equal to 2
-    assert len(orders) == 2
+    # Check quantity of orders equal to 1
+    assert len(orders) == 1
 
     # Check structure of data
     assert orders[0][0] == 1

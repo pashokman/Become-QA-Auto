@@ -50,7 +50,7 @@ class Database:
         query = "SELECT orders.id, customers.name, products.name, \
             products.description, orders.order_date \
             FROM orders \
-            JOIN customers ON orders.customer_id = customer_id \
+            JOIN customers ON orders.customer_id = customers.id \
             JOIN products ON orders.product_id = products.id"
         self.cursor.execute(query)
         record = self.cursor.fetchall()
