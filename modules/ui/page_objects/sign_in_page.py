@@ -11,22 +11,17 @@ class SignInPage(BasePage):
         self.driver.get(SignInPage.URL)
 
     def try_login(self, username, password):
-        # Find login field
-        login_elem = self.driver.find_element(By.ID, "login_field")
-
-        # Enter nonexisting username/email
-        login_elem.send_keys(username)
-
-        # Find password field
-        password_elem = self.driver.find_element(By.ID, "password")
-
-        # Enter wrong password
-        password_elem.send_keys(password)
-
-        # Find button 'Login'
-        btn_login = self.driver.find_element(By.NAME, 'commit')
-
-        # Click on btn
+            # Find login field
+        login_elem = self.find_element_by_id("login_field")        
+            # Enter nonexisting username/email
+        self.paste_value_into_field(login_elem, username)       
+            # Find password field
+        password_elem = self.find_element_by_id("password")        
+            # Enter wrong password
+        self.paste_value_into_field(password_elem, password)       
+            # Find button 'Login'
+        btn_login = self.find_element_by_name('commit')        
+            # Click on btn
         btn_login.click()
 
     def check_title(self, expected_title):
