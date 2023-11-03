@@ -1,5 +1,4 @@
 from modules.ui.page_objects.base_page import BasePage
-import logging
 from utils.logger import Loger
 
 
@@ -23,35 +22,35 @@ class UAKinoClubPage(BasePage):
         
         search_btn = self.find_element_by_id('show-search')
         search_btn.click()
-        self.log.info("Open search field.")
+        self.log.debug("Open search field.")
 
         search_field = self.find_element_by_id('ajax_search')
         self.paste_value_into_field(search_field, movie_name)
-        self.log.info(f"Enter searched value into search field - {movie_name}.")
+        self.log.debug(f"Enter searched value into search field - {movie_name}.")
 
         submit_search_btn = self.find_element_by_xpath("//button[contains(text(),'Знайти')]")
         submit_search_btn.click()
-        self.log.info("Start searching.")
+        self.log.debug("Start searching.")
 
     def open_first_result_movie(self):
         first_movie = self.find_elements_by_xpath("//div[@class='movie-item short-item']")[0]
         self.scroll_into_view(first_movie)
         first_movie.click()
-        self.log.info("First result movie is open.")
+        self.log.debug("Open first result movie.")
 
     def save_relative_movies_years(self):
         relative_movies_years = self.find_elements_by_xpath("//div[@class='rel-item']//div[@class='related-date']")
         text_relative_movies_years = []
         for i in range(len(relative_movies_years)):
             text_relative_movies_years.append(relative_movies_years[i].text)
-        self.log.info("Save movie years into a list.")
+        self.log.debug("Save movie years into a list.")
         return text_relative_movies_years
     
 
     def open_relative_movie(self, number): #starts from 1
         movie = self.find_element_by_xpath(f"//div[@class='rel-item'][{number}]") # Подвійний форсаж
         movie.click()
-        self.log.info(f"Relative movie {number} is open.")
+        self.log.debug(f"Open relative movie {number}.")
 
 
         # Assertions

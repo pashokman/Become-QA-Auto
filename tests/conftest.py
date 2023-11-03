@@ -5,8 +5,8 @@ from modules.api.clients.pokemon import Pokemon
 
 from modules.common.database import Database
 
-from selenium import webdriver
-from selenium.webdriver.common.by import By
+from modules.ui.page_objects.uakinoclub_page import UAKinoClubPage
+from modules.ui.page_objects.herokuapp_page import HerokuAppPage
 
 
 class User:
@@ -42,11 +42,30 @@ def github_api():
 @pytest.fixture
 def pokemon_api():
     api = Pokemon()
+
     yield api
 
 
 @pytest.fixture
 def database():
     db = Database()
+
     yield db
     
+
+@pytest.fixture
+def uakinoclub():
+    page = UAKinoClubPage()
+
+    yield page
+
+    page.close()
+
+
+@pytest.fixture
+def herokuapp():
+    page = HerokuAppPage()
+
+    yield page
+
+    page.close()
