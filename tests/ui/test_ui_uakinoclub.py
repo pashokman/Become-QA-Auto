@@ -7,9 +7,8 @@ log = Loger.custom_logger(log_level=logging.INFO)
 
 
 @pytest.mark.personal_ui
-def test_start():
-    text = "Testing personal_ui"
-    log.critical(f"{text:.^75}")
+def test_start(uakinoclub):
+    uakinoclub.start()
 
 
 @pytest.mark.personal_ui
@@ -72,6 +71,5 @@ def test_third_related_movie_year(uakinoclub):
 
 
 @pytest.mark.personal_ui
-def test_end():
-    text = "SUCCESSFUL END OF TESTING - personal_ui tests"
-    log.critical(f"{text:.^75}")
+def test_end(uakinoclub):
+    uakinoclub.end()

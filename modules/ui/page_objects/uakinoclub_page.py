@@ -16,6 +16,16 @@ class UAKinoClubPage(BasePage):
     def __init__(self):
         super().__init__()
 
+    
+    def start(self):
+        text = "TESTING PERSONAL_UI"
+        self.log.critical(f"{text:.^75}")
+
+    def end(self):
+        text = "SUCCESSFUL END OF TESTING - PERSONAL_UI"
+        self.log.critical(f"{text:.^75}")
+
+
         # Steps to reproduce methods
     def search_some_movie(self, movie_name):
         self.go_to(UAKinoClubPage.MAIN_URL)

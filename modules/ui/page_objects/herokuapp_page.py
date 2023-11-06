@@ -10,6 +10,14 @@ class HerokuAppPage(BasePage):
     def __init__(self):
         super().__init__()
 
+    def start(self):
+        text = "TESTING PERSONAL_UI_2"
+        self.log.critical(f"{text:.^75}")
+
+    def end(self):
+        text = "SUCCESSFUL END OF TESTING - PERSONAL_UI_2"
+        self.log.critical(f"{text:.^75}")
+
         # Steps to reproduce
     def go_to_add_rem_elem_page(self):
         self.go_to(HerokuAppPage.MAIN_URL)

@@ -7,9 +7,8 @@ log = Loger.custom_logger(log_level=logging.INFO)
 
 
 @pytest.mark.personal_ui_2
-def test_start():
-    text = "Testing personal_ui_2"
-    log.critical(f"{text:.^75}")
+def test_start(herokuapp):
+    herokuapp.start()
 
 
 @pytest.mark.personal_ui_2
@@ -53,6 +52,5 @@ def test_drag_and_drop(herokuapp):
 
 
 @pytest.mark.personal_ui_2
-def test_end():
-    text = "SUCCESSFUL END OF TESTING - personal_ui_2 tests"
-    log.critical(f"{text:.^75}")
+def test_end(herokuapp):
+    herokuapp.end()
