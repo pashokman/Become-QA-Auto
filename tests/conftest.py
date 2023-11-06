@@ -71,8 +71,10 @@ def herokuapp():
 
     page.close()
 
+
 @pytest.fixture
 def restbooker():
     api = Restbooker()
 
     yield api
+    

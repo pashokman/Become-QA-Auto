@@ -1,9 +1,4 @@
 import pytest
-import logging
-from utils.logger import Loger
-
-
-log = Loger.custom_logger(log_level=logging.INFO)
 
 
 @pytest.mark.personal_ui_2
