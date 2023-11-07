@@ -25,10 +25,10 @@ class SignInPage(BasePage):
         btn_login.click()
 
     def check_title(self, expected_title):
-        return self.driver.title == expected_title
+        assert self.driver.title == expected_title
     
     def title_testing(self, username, password, expected_title):
         self.go_to()
         self.try_login(username, password)
         self.check_title(expected_title)
-        self.close()
+        

@@ -56,7 +56,6 @@ class UAKinoClubPage(BasePage):
         self.log.debug("Save movie years into a list.")
         return text_relative_movies_years
     
-
     def open_relative_movie(self, number): #starts from 1
         movie = self.find_element_by_xpath(f"//div[@class='rel-item'][{number}]") # Подвійний форсаж
         movie.click()

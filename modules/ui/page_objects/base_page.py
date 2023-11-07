@@ -7,9 +7,11 @@ class BasePage:
         self.driver = webdriver.Chrome()
         self.driver.maximize_window()
         
+        
         # Go to some page
     def go_to(self, url):
         self.driver.get(url)
+
 
         # Find element by attribute (id, name, class, xpath)
     def find_element_by_id(self, id):
@@ -24,18 +26,22 @@ class BasePage:
     def find_element_by_xpath(self, xpath):
         return self.driver.find_element(By.XPATH, xpath)
     
+
         # Find list of elements
     def find_elements_by_xpath(self, xpath):
         return self.driver.find_elements(By.XPATH, xpath)
     
+
         #  Paste value into a field
     def paste_value_into_field(self, element, value):
         return element.send_keys(f'{value}')
     
+
         # Scroll element into view
     def scroll_into_view(self, element):
         js_code = "arguments[0].scrollIntoView(true)"
         self.driver.execute_script(js_code, element)
+
 
         # Close browser
     def close(self):

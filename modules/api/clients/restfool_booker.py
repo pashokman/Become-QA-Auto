@@ -16,7 +16,6 @@ class Restbooker:
 
 
         # Steps to reproduce methods
-
     def auth(self):
         auth_data = {
             "username" : "admin",
@@ -53,8 +52,6 @@ class Restbooker:
 
         return body
     
-
-
 
         # Assertions
     def auth_assertion(self):

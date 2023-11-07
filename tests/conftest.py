@@ -1,11 +1,15 @@
 import pytest
 
+# API modules-------------------------------------------
 from modules.api.clients.github import GitHub
 from modules.api.clients.pokemon import Pokemon
 from modules.api.clients.restfool_booker import Restbooker
 
+# Database module-------------------------------------------
 from modules.common.database import Database
 
+# UI pages modules-------------------------------------------
+from modules.ui.page_objects.sign_in_page import SignInPage
 from modules.ui.page_objects.uakinoclub_page import UAKinoClubPage
 from modules.ui.page_objects.herokuapp_page import HerokuAppPage
 
@@ -34,6 +38,7 @@ def user():
     user.remove()
 
 
+    # API fixtures-------------------------------------------
 @pytest.fixture
 def github_api():
     api = GitHub()
@@ -48,11 +53,29 @@ def pokemon_api():
 
 
 @pytest.fixture
+def restbooker():
+    api = Restbooker()
+
+    yield api
+
+
+    # Databse fixtures-------------------------------------------
+@pytest.fixture
 def database():
     db = Database()
 
     yield db
-    
+
+
+    # UI fixtures-------------------------------------------
+@pytest.fixture
+def sign_in_page():
+    page = SignInPage()
+
+    yield page
+
+    page.close()
+
 
 @pytest.fixture
 def uakinoclub():
@@ -70,11 +93,3 @@ def herokuapp():
     yield page
 
     page.close()
-
-
-@pytest.fixture
-def restbooker():
-    api = Restbooker()
-
-    yield api
-    

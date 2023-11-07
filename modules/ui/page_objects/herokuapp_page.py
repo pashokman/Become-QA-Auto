@@ -58,6 +58,7 @@ class HerokuAppPage(BasePage):
         actions.drag_and_drop(drag_from, drag_to).perform()
         self.log.debug("Drag and drop elements.")
 
+
         # Assertions
         # Check if element exist
     def elements_count_assertion(self, xpath, count):
