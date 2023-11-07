@@ -16,42 +16,26 @@ class Restbooker:
 
 
         # Steps to reproduce methods
-    def auth(self):
-        auth_data = {
-            "username" : "admin",
-            "password" : "password123"
-        }
+    def auth(self, auth_data):
         request = requests.post(f"{Restbooker.MAIN_URL}/auth", json=auth_data)
 
-        body = request.json()
         assert request.status_code == 200
         self.log.debug("Auth successful.")
+
+        body = request.json()
         return body["token"]
         
 
-    def create_booking(self, firstname: str, lastname: str, totalprice: int, depositpaid: bool, 
-                       checkin: str, checkout: str, additionalneeds: str):
-
-        new_booking = {
-            "firstname" : f"{firstname}",
-            "lastname" : f"{lastname}",
-            "totalprice" : totalprice,
-            "depositpaid" : depositpaid,
-            "bookingdates" : {
-                "checkin" : f"{checkin}",
-                "checkout" : f"{checkout}"
-            },
-            "additionalneeds" : f"{additionalneeds}"
-        }
-
+    def create_booking(self, new_booking):
         request = requests.post(f"{Restbooker.MAIN_URL}/booking", json=new_booking)
 
-        body = request.json()
         assert request.status_code == 200
         self.log.debug("Create booking successful.")
 
+        body = request.json()
         return body
     
+
     def get_booking(self, booking_id, status_code):
         request = requests.get(f"{Restbooker.MAIN_URL}/booking/{booking_id}")
 
@@ -61,28 +45,16 @@ class Restbooker:
             body = request.json()
             return body
     
-    def update_booking(self, token, booking_id, firstname: str, lastname: str, totalprice: int, depositpaid: bool, 
-                            checkin: str, checkout: str, additionalneeds: str):
-        updated_booking = {
-            "firstname" : f"{firstname}",
-            "lastname" : f"{lastname}",
-            "totalprice" : totalprice,
-            "depositpaid" : depositpaid,
-            "bookingdates" : {
-                "checkin" : f"{checkin}",
-                "checkout" : f"{checkout}"
-            },
-            "additionalneeds" : f"{additionalneeds}"
-        }
 
+    def update_booking(self, token, booking_id, update_booking_data):
         request = requests.put(f"{Restbooker.MAIN_URL}/booking/{booking_id}", 
-                               json=updated_booking, 
+                               json=update_booking_data, 
                                headers={"Cookie": f"token={token}"})
 
-        body = request.json()
         assert request.status_code == 200
         self.log.debug("Update booking successful.")
 
+        body = request.json()
         return body
     
 
@@ -97,69 +69,34 @@ class Restbooker:
     
 
         # Assertions
-    def auth_assertion(self):
-        token = self.auth()
+    def auth_assertion(self, auth_data):
+        token = self.auth(auth_data)
         
         assert len(token) != 0
 
 
-    def create_booking_assertion(self, firstname: str, lastname: str, totalprice: int, depositpaid: bool, 
-                            checkin: str, checkout: str, additionalneeds: str, request_body):
+    def create_booking_assertion(self, new_booking, request_body):
+        expected_result = {}
+        expected_result["booking"] = new_booking
         
         id = request_body['bookingid']
+        expected_result["bookingid"] = id     
 
-        expected_booking_object = {
-            "bookingid": id,
-            "booking": {
-                "firstname" : f"{firstname}",
-                "lastname" : f"{lastname}",
-                "totalprice" : totalprice,
-                "depositpaid" : depositpaid,
-                "bookingdates" : {
-                    "checkin" : f"{checkin}",
-                    "checkout" : f"{checkout}"
-                },
-                "additionalneeds" : f"{additionalneeds}"
-            }
-        }     
-
-        assert request_body == expected_booking_object
+        assert expected_result == request_body
         self.log.info("Created booking object is equal to expected booking object.")
 
 
-    def get_booking_assertion(self, firstname: str, lastname: str, totalprice: int, depositpaid: bool, 
-                            checkin: str, checkout: str, additionalneeds: str, request_body):
-        expected_booking_object = {
-            "firstname" : f"{firstname}",
-            "lastname" : f"{lastname}",
-            "totalprice" : totalprice,
-            "depositpaid" : depositpaid,
-            "bookingdates" : {
-                "checkin" : f"{checkin}",
-                "checkout" : f"{checkout}"
-            },
-            "additionalneeds" : f"{additionalneeds}"
-        }
+    def get_booking_assertion(self, new_booking, request_body):
+        expected_result = new_booking
 
-        assert request_body == expected_booking_object
+        assert expected_result == request_body
         self.log.info("Getted booking object is equal to expected booking object.")
 
-    def update_booking_assertion(self, firstname: str, lastname: str, totalprice: int, depositpaid: bool, 
-                            checkin: str, checkout: str, additionalneeds: str, request_body):
-        expected_booking_object = {
-            "firstname" : f"{firstname}",
-            "lastname" : f"{lastname}",
-            "totalprice" : totalprice,
-            "depositpaid" : depositpaid,
-            "bookingdates" : {
-                "checkin" : f"{checkin}",
-                "checkout" : f"{checkout}"
-            },
-            "additionalneeds" : f"{additionalneeds}"
-        }
 
-        assert request_body == expected_booking_object
+    def update_booking_assertion(self, update_booking_data, request_body):
+        assert update_booking_data == request_body
         self.log.info("Updated booking object is equal to expected booking object.")
+
 
     def delete_booking_assertion(self, request_body, status_code):
         self.get_booking(request_body["bookingid"], status_code)
