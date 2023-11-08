@@ -3,7 +3,7 @@ import pytest
 # API modules-------------------------------------------
 from modules.api.clients.github import GitHub
 from modules.api.clients.pokemon import Pokemon
-from modules.api.clients.restfool_booker import Restbooker
+from modules.api.clients.restfool_booker import RestBooker
 
 # Database module-------------------------------------------
 from modules.common.database import Database
@@ -54,7 +54,7 @@ def pokemon_api():
 
 @pytest.fixture
 def restbooker():
-    api = Restbooker()
+    api = RestBooker()
 
     yield api
 

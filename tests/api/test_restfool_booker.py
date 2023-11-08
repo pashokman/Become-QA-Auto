@@ -1,12 +1,12 @@
 import pytest
 
     # Test objects
-auth_data = {
+AUTH_DATA = {
     "username" : "admin",
     "password" : "password123"
 }
 
-new_booking_data = {
+NEW_BOOKING_DATA = {
     "firstname" : "Lester",
     "lastname" : "Tester",
     "totalprice" : 12000,
@@ -18,7 +18,7 @@ new_booking_data = {
     "additionalneeds" : "two bathrooms"
 }
 
-update_booking_data = {
+UPDATE_BOOKING_DATA = {
     "firstname" : "Toster",
     "lastname" : "Rester",
     "totalprice" : 5000,
@@ -39,43 +39,43 @@ def test_start(restbooker):
 
 @pytest.mark.restbooker
 def test_auth(restbooker):
-    restbooker.auth_assertion(auth_data)
+    restbooker.auth_assertion(AUTH_DATA)
 
 
 @pytest.mark.restbooker
 def test_booking_creating(restbooker):
-    new_booking_response = restbooker.create_booking(new_booking_data)
+    new_booking_response = restbooker.create_booking(NEW_BOOKING_DATA)
 
-    restbooker.create_booking_assertion(new_booking_data, new_booking_response)
+    restbooker.create_booking_assertion(NEW_BOOKING_DATA, new_booking_response)
 
 
 @pytest.mark.restbooker
 def test_booking_getting(restbooker):
-    new_booking = restbooker.create_booking(new_booking_data)
-    get_booking = restbooker.get_booking(new_booking["bookingid"], 200)
+    new_booking_response = restbooker.create_booking(NEW_BOOKING_DATA)
+    get_booking_response = restbooker.get_booking(new_booking_response["bookingid"], 200)
 
-    restbooker.get_booking_assertion(new_booking_data, get_booking)
+    restbooker.get_booking_assertion(NEW_BOOKING_DATA, get_booking_response)
 
 
 @pytest.mark.restbooker
 def test_booking_updating(restbooker):
-    token = restbooker.auth(auth_data)
-    new_booking = restbooker.create_booking(new_booking_data)
-    update_booking = restbooker.update_booking(token, new_booking["bookingid"], update_booking_data)
+    token = restbooker.auth(AUTH_DATA)
+    new_booking_response = restbooker.create_booking(NEW_BOOKING_DATA)
+    update_booking_response = restbooker.update_booking(token, new_booking_response["bookingid"], UPDATE_BOOKING_DATA)
 
-    restbooker.update_booking_assertion(update_booking_data, update_booking)
+    restbooker.update_booking_assertion(UPDATE_BOOKING_DATA, update_booking_response)
     
-    get_booking = restbooker.get_booking(new_booking["bookingid"], 200)
-    restbooker.get_booking_assertion(update_booking_data, get_booking)
+    get_booking_response = restbooker.get_booking(new_booking_response["bookingid"], 200)
+    restbooker.get_booking_assertion(UPDATE_BOOKING_DATA, get_booking_response)
 
 
 @pytest.mark.restbooker
 def test_booking_deleting(restbooker):
-    token = restbooker.auth(auth_data)
-    new_booking = restbooker.create_booking(new_booking_data)
+    token = restbooker.auth(AUTH_DATA)
+    new_booking_response = restbooker.create_booking(NEW_BOOKING_DATA)
 
-    restbooker.delete_booking(token, new_booking)
-    restbooker.delete_booking_assertion(new_booking, 404)
+    restbooker.delete_booking(token, new_booking_response)
+    restbooker.delete_booking_assertion(new_booking_response, 404)
 
 
 @pytest.mark.restbooker

@@ -19,7 +19,7 @@ class HerokuAppPage(BasePage):
         self.log.critical(f"{text:.^75}")
 
         # Steps to reproduce
-    def go_to_add_rem_elem_page(self):
+    def go_to_add_remove_elem_page(self):
         self.go_to(HerokuAppPage.MAIN_URL)
         self.log.debug("Open herokuapp page.")
         addRemElemLink = self.find_element_by_xpath("//a[normalize-space()='Add/Remove Elements']")
