@@ -1,3 +1,11 @@
+# My degree project from course - Automation Software Testing
+In this framework I study to test API, UI, Database and it's separated properly.
+
+"modules" folder consists from, folders: "api/clients", "common", "ui".
+Every folder consists from one-few modules in wich one I describe classes and their methods to work with API/Database/UI in tests;
+
+
+### Help to run tests:
 To run all test need to use command: 
 python -m pytest
 

@@ -15,6 +15,7 @@ from modules.ui.page_objects.herokuapp_page import HerokuAppPage
 
 
 class User:
+    
     def __init__(self):
         self.name = None
         self.second_name = None
@@ -38,7 +39,7 @@ def user():
     user.remove()
 
 
-    # API fixtures-------------------------------------------
+# API fixtures-------------------------------------------
 @pytest.fixture
 def github_api():
     api = GitHub()
@@ -59,7 +60,7 @@ def restbooker():
     yield api
 
 
-    # Databse fixtures-------------------------------------------
+# Databse fixtures-------------------------------------------
 @pytest.fixture
 def database():
     db = Database()
@@ -67,7 +68,7 @@ def database():
     yield db
 
 
-    # UI fixtures-------------------------------------------
+# UI fixtures-------------------------------------------
 @pytest.fixture
 def sign_in_page():
     page = SignInPage()
