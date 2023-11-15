@@ -1,6 +1,14 @@
+""" 
+Here I learned how to:
+    - test CRUD operetions through API;
+    - used prepeared objects for testing;
+    - how to add logs. 
+"""
+
 import pytest
 
-    # Test objects
+    
+# Test objects ---------------------------------------------------------------------------------------------
 AUTH_DATA = {
     "username" : "admin",
     "password" : "password123"
@@ -31,7 +39,8 @@ UPDATE_BOOKING_DATA = {
 }
 
 
-    # Tests
+# Tests ---------------------------------------------------------------------------------------------
+# Method that add additional info string in logs about start of testing this module.
 @pytest.mark.restbooker
 def test_start(restbooker):
     restbooker.start()
@@ -39,14 +48,23 @@ def test_start(restbooker):
 
 @pytest.mark.restbooker
 def test_auth(restbooker):
-    restbooker.auth_assertion(AUTH_DATA)
+    token = restbooker.auth(AUTH_DATA)
+
+    assert len(token) != 0
 
 
 @pytest.mark.restbooker
 def test_booking_creating(restbooker):
     new_booking_response = restbooker.create_booking(NEW_BOOKING_DATA)
 
-    restbooker.create_booking_assertion(NEW_BOOKING_DATA, new_booking_response)
+    expected_result = {}
+    expected_result["booking"] = NEW_BOOKING_DATA
+    id = new_booking_response['bookingid']
+    expected_result["bookingid"] = id     
+
+    assert expected_result == new_booking_response
+
+    restbooker.log.info("Created booking object is equal to expected booking object.")
 
 
 @pytest.mark.restbooker
@@ -54,7 +72,9 @@ def test_booking_getting(restbooker):
     new_booking_response = restbooker.create_booking(NEW_BOOKING_DATA)
     get_booking_response = restbooker.get_booking(new_booking_response["bookingid"], 200)
 
-    restbooker.get_booking_assertion(NEW_BOOKING_DATA, get_booking_response)
+    assert get_booking_response == NEW_BOOKING_DATA
+
+    restbooker.log.info("Getted booking object is equal to expected booking object.")
 
 
 @pytest.mark.restbooker
@@ -62,22 +82,26 @@ def test_booking_updating(restbooker):
     token = restbooker.auth(AUTH_DATA)
     new_booking_response = restbooker.create_booking(NEW_BOOKING_DATA)
     update_booking_response = restbooker.update_booking(token, new_booking_response["bookingid"], UPDATE_BOOKING_DATA)
-
-    restbooker.update_booking_assertion(UPDATE_BOOKING_DATA, update_booking_response)
-    
     get_booking_response = restbooker.get_booking(new_booking_response["bookingid"], 200)
-    restbooker.get_booking_assertion(UPDATE_BOOKING_DATA, get_booking_response)
+
+    assert update_booking_response == UPDATE_BOOKING_DATA    
+    assert get_booking_response == UPDATE_BOOKING_DATA
+
+    restbooker.log.info("Updated booking object is equal to expected booking object.")
 
 
 @pytest.mark.restbooker
 def test_booking_deleting(restbooker):
     token = restbooker.auth(AUTH_DATA)
     new_booking_response = restbooker.create_booking(NEW_BOOKING_DATA)
-
     restbooker.delete_booking(token, new_booking_response)
-    restbooker.delete_booking_assertion(new_booking_response, 404)
+    get_booking_response = restbooker.get_booking(new_booking_response["bookingid"], 404)
+
+    assert get_booking_response == None
+    restbooker.log.info("Deleting of booking object is successful.")
 
 
+# Method that add additional info string in logs about end of testing this module.
 @pytest.mark.restbooker
 def test_end(restbooker):
     restbooker.end()

@@ -27,14 +27,14 @@ class BasePage:
         return self.driver.find_element(By.XPATH, xpath)
     
 
-        # Find list of elements
+        # Find list of elements_by_xpath
     def find_elements_by_xpath(self, xpath):
         return self.driver.find_elements(By.XPATH, xpath)
     
 
-        #  Paste value into a field
-    def paste_value_into_field(self, element, value):
-        return element.send_keys(f'{value}')
+    #     #  Paste value into a field
+    # def paste_value_into_field(self, element, value):
+    #     return element.send_keys(f'{value}')
     
 
         # Scroll element into view

@@ -3,6 +3,7 @@ from utils.logger import Loger
 
 
 class UAKinoClubPage(BasePage):
+
     log = Loger.custom_logger()
 
     MAIN_URL = 'https://uakino.club/'
@@ -35,12 +36,21 @@ class UAKinoClubPage(BasePage):
         self.log.debug("Open search field.")
 
         search_field = self.find_element_by_id('ajax_search')
-        self.paste_value_into_field(search_field, movie_name)
+        search_field.send_keys(f'{movie_name}')
         self.log.debug(f"Enter searched value into search field - {movie_name}.")
 
         submit_search_btn = self.find_element_by_xpath("//button[contains(text(),'Знайти')]")
         submit_search_btn.click()
         self.log.debug("Start searching.")
+
+
+    def get_movie_message(self):
+        return self.find_element_by_id("dle-speedbar").text
+    
+
+    def get_searched_movie_count(self):
+        return self.find_elements_by_xpath("//div[@class='movie-item short-item']")
+
 
     def open_first_result_movie(self):
         first_movie = self.find_elements_by_xpath("//div[@class='movie-item short-item']")[0]
@@ -48,14 +58,17 @@ class UAKinoClubPage(BasePage):
         first_movie.click()
         self.log.debug("Open first result movie.")
 
+
     def save_relative_movies_years(self):
         relative_movies_years = self.find_elements_by_xpath("//div[@class='rel-item']//div[@class='related-date']")
         text_relative_movies_years = []
         for i in range(len(relative_movies_years)):
             text_relative_movies_years.append(relative_movies_years[i].text)
         self.log.debug("Save movie years into a list.")
+        
         return text_relative_movies_years
     
+
     def open_relative_movie(self, number): #starts from 1
         movie = self.find_element_by_xpath(f"//div[@class='rel-item'][{number}]") # Подвійний форсаж
         movie.click()
@@ -65,6 +78,7 @@ class UAKinoClubPage(BasePage):
         # Assertions
     def result_movie_count_assertion(self, count):
         result_movie_count = self.find_elements_by_xpath("//div[@class='movie-item short-item']")
+        
         assert len(result_movie_count) == count
         self.log.info(f"! Successful ! Result movies count is equal to needed value - {count}.")
 

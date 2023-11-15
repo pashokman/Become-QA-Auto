@@ -1,25 +1,30 @@
+""" 
+Here I learned how to test databese, using methods:
+JOIN, SUM, MAX, SELECT, INSERT, DELETE, UPDATE.
+"""
+
 import pytest
 
 
+# Testing database connection -------------------------------------------------------------------------------------
 @pytest.mark.database
 def test_database_connection(database):
     database.test_connection()
 
 
+# Testing products ------------------------------------------------------------------------------------------------
 @pytest.mark.database
-def test_check_all_users(database):
-    users = database.get_all_users()
-    print(f'\n{users}')
+def test_products_quantity_sum(database):
+    sum = database.get_products_qnt_sum()
+    
+    assert sum[0][0] == 75
 
 
 @pytest.mark.database
-def test_check_user_sergii(database):
-    user = database.get_user_address_by_name('Sergii')
+def test_max_product_quantity(database):
+    max = database.get_max_product_qnt()
 
-    assert user[0][0] == 'Maydan Nezalezhnosti 1'
-    assert user[0][1] == 'Kyiv'
-    assert user[0][2] == '3127'
-    assert user[0][3] == 'Ukraine'
+    assert max[0][0] == 30
 
 
 @pytest.mark.database
@@ -37,6 +42,7 @@ def test_product_insert(database):
 
     assert cookies_qnt[0][0] == 30
 
+
 @pytest.mark.database
 def test_product_delete(database):
     database.insert_product(99, 'тестові', 'дані', 999)
@@ -46,6 +52,24 @@ def test_product_delete(database):
     assert len(qnt) == 0
 
 
+# Testing users ------------------------------------------------------------------------------------------------ 
+@pytest.mark.database
+def test_check_user_sergii(database):
+    user = database.get_user_address_by_name('Sergii')
+
+    assert user[0][0] == 'Maydan Nezalezhnosti 1'
+    assert user[0][1] == 'Kyiv'
+    assert user[0][2] == '3127'
+    assert user[0][3] == 'Ukraine'
+
+
+@pytest.mark.database
+def test_check_all_users(database):
+    users = database.get_all_users()
+    print(f'\n{users}')
+
+
+# Testing orders -----------------------------------------------------------------------------------------------
 @pytest.mark.database
 def test_detailed_orders(database):
     orders = database.get_detailed_orders()
@@ -60,7 +84,7 @@ def test_detailed_orders(database):
     assert orders[0][3] == 'з цукром'
 
 
-# Additional tests
+# Testing customers --------------------------------------------------------------------------------------------
 @pytest.mark.database
 def test_customer_insert(database):
     database.insert_new_customer(88, 'Pavlo', 'Shevchenka 10', 'New York', '56ZMU78', 'USA')
@@ -78,19 +102,3 @@ def test_update_customer_city(database):
     database.delete_customer_by_id(88)
 
     assert city[0][0] == 'LA'
-
-
-@pytest.mark.database
-def test_get_sum_of_quantity_products(database):
-    sum = database.get_products_qnt_sum()
-    
-    assert sum[0][0] == 75
-
-
-@pytest.mark.database
-def test_get_max_product_quantity(database):
-    max = database.get_max_product_qnt()
-
-    assert max[0][0] == 30
-    
-

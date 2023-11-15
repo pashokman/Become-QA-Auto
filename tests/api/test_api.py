@@ -1,17 +1,28 @@
+""" Here I learned how to send API requests and verify response parameters """
+
 import pytest
+import requests
 
 
-@pytest.mark.change
-def test_remove_name(user):
-    user.name = ""
-    assert user.name == ""
+@pytest.mark.api
+def test_fitst_request():
+    response = requests.get("https://api.github.com/zen")
+    print(f"\nResponse is: {response.text}")
 
 
-@pytest.mark.check
-def test_name(user):
-    assert user.name == "Pavlo"
+@pytest.mark.api
+def test_second_request():
+    response = requests.get("https://api.github.com/users/defunkt")
+    body = response.json()
+    headers = response.headers
+
+    assert body["name"] == "Chris Wanstrath"
+    assert response.status_code == 200
+    assert headers["Server"] == "GitHub.com"
 
 
-@pytest.mark.check
-def test_second_name(user):
-    assert user.second_name == "Lekhitskyi"
+@pytest.mark.api
+def test_status_code_request():
+    response = requests.get("https://api.github.com/users/pavlo_lekhitskyi")
+
+    assert response.status_code == 404

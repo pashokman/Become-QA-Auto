@@ -1,10 +1,21 @@
+"""
+Here I learned:
+    - how to work with Selenium webdriver; 
+    - open page; 
+    - find element;
+    - enter some value into a field; 
+    - click on element; 
+    - get text from an element;
+    - get page title.
+"""
+
 import pytest
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 
-@pytest.mark.ui
+@pytest.mark.git_hub_ui
 def test_check_incorrect_username():
     # Create an object for manage browser
     driver = webdriver.Chrome()

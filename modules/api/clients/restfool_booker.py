@@ -1,11 +1,14 @@
 import requests
 from utils.logger import Loger
 
+
 class RestBooker:
+    
     log = Loger.custom_logger()
 
     MAIN_URL = "https://restful-booker.herokuapp.com"
-
+    
+    # Methods that add additional info string in logs about start/end of testing this module. ----------------------
     def start(self):
         text = "TESTING REQRES"
         self.log.critical(f"{text:.^75}")        
@@ -15,7 +18,7 @@ class RestBooker:
         self.log.critical(f"{text:.^75}")        
 
 
-        # Steps to reproduce methods
+    # Steps to reproduce methods ------------------------------------------------------------------
     def auth(self, auth_data):
         request = requests.post(f"{RestBooker.MAIN_URL}/auth", json=auth_data)
 
@@ -67,37 +70,3 @@ class RestBooker:
 
         assert request.status_code == 201
         self.log.debug("Delete booking successful.")
-    
-
-        # Assertions
-    def auth_assertion(self, auth_data):
-        token = self.auth(auth_data)
-        
-        assert len(token) != 0
-
-
-    def create_booking_assertion(self, new_booking, request_body):
-        expected_result = {}
-        expected_result["booking"] = new_booking
-        
-        id = request_body['bookingid']
-        expected_result["bookingid"] = id     
-
-        assert expected_result == request_body
-        self.log.info("Created booking object is equal to expected booking object.")
-
-
-    def get_booking_assertion(self, new_booking, request_body):
-        expected_result = new_booking
-
-        assert expected_result == request_body
-        self.log.info("Getted booking object is equal to expected booking object.")
-
-
-    def update_booking_assertion(self, update_booking_data, request_body):
-        assert update_booking_data == request_body
-        self.log.info("Updated booking object is equal to expected booking object.")
-
-
-    def delete_booking_assertion(self, request_body, status_code):
-        self.get_booking(request_body["bookingid"], status_code)

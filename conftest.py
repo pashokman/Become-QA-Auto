@@ -15,7 +15,7 @@ from modules.ui.page_objects.herokuapp_page import HerokuAppPage
 
 
 class User:
-    
+
     def __init__(self):
         self.name = None
         self.second_name = None
@@ -49,8 +49,9 @@ def github_api():
 @pytest.fixture
 def pokemon_api():
     api = Pokemon()
+    pokemon = api.get_pokemon("ditto")
 
-    yield api
+    yield pokemon
 
 
 @pytest.fixture
