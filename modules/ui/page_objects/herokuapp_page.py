@@ -2,7 +2,9 @@ from modules.ui.page_objects.base_page import BasePage
 from utils.logger import Loger
 from selenium.webdriver.common.action_chains import ActionChains
 
+
 class HerokuAppPage(BasePage):
+    
     log = Loger.custom_logger()
 
     MAIN_URL = "https://the-internet.herokuapp.com/"
@@ -10,15 +12,19 @@ class HerokuAppPage(BasePage):
     def __init__(self):
         super().__init__()
 
+
+    # Methods that add additional info string in logs about start/end of testing this module. ------------------------
     def start(self):
-        text = "TESTING PERSONAL_UI_2"
+        text = "TESTING HEROKUAPP_UI"
         self.log.critical(f"{text:.^75}")
+
 
     def end(self):
-        text = "SUCCESSFUL END OF TESTING - PERSONAL_UI_2"
+        text = "SUCCESSFUL END OF TESTING - HEROKUAPP_UI"
         self.log.critical(f"{text:.^75}")
 
-        # Steps to reproduce
+
+    # Steps to reproduce methods -------------------------------------------------------------------------------------
     def go_to_add_remove_elem_page(self):
         self.go_to(HerokuAppPage.MAIN_URL)
         self.log.debug("Open herokuapp page.")
@@ -27,14 +33,18 @@ class HerokuAppPage(BasePage):
         self.log.debug("Click on 'Add/remove element' link.")
 
 
-    def click_add_elem(self, numb_click):
+    def click_add_elem_times(self, numb_click):
         while numb_click > 0:
             self.find_element_by_xpath("//button[normalize-space()='Add Element']").click()
             numb_click -= 1
             self.log.debug("Click on 'Add Element' button.")
 
+    
+    def get_added_elements_count(self):
+        return len(self.find_elements_by_xpath("//button[@class='added-manually']"))
 
-    def click_del_elem(self, numb_click):
+
+    def click_del_elem_times(self, numb_click):
         elem_list = self.find_elements_by_xpath("//button[@class='added-manually']")
         while numb_click > 0:
             elem_list[0].click()
@@ -50,7 +60,7 @@ class HerokuAppPage(BasePage):
         self.log.debug("Click on 'Add Element' button.")
 
 
-    def drag_elem_and_drop(self):
+    def drag_and_drop_elem(self):
         drag_from = self.find_element_by_id('column-a')
         drag_to = self.find_element_by_id('column-b')
 
@@ -59,13 +69,5 @@ class HerokuAppPage(BasePage):
         self.log.debug("Drag and drop elements.")
 
 
-        # Assertions
-        # Check if element exist
-    def elements_count_assertion(self, xpath, count):
-        assert len(self.find_elements_by_xpath(xpath)) == count
-        self.log.info(f"! Successful ! Elements count is - {count}.")
-
-    def drag_and_drop_assertion(self):
-        elem_list = self.find_elements_by_xpath("//div[@class='column']")
-        assert ((elem_list[0].text == "B") and (elem_list[1].text == "A")) == True
-        self.log.info(f"! Successful ! Drag and drop completed.")
+    def get_drag_and_drop_elem_list(self):
+        return self.find_elements_by_xpath("//div[@class='column']")

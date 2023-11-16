@@ -9,7 +9,7 @@ from modules.api.clients.restfool_booker import RestBooker
 from modules.common.database import Database
 
 # UI pages modules-------------------------------------------
-from modules.ui.page_objects.sign_in_page import SignInPage
+from modules.ui.page_objects.first_ui_page import SignInPage
 from modules.ui.page_objects.uakinoclub_page import UAKinoClubPage
 from modules.ui.page_objects.herokuapp_page import HerokuAppPage
 
@@ -61,7 +61,7 @@ def restbooker():
     yield api
 
 
-# Databse fixtures-------------------------------------------
+# Database fixtures-------------------------------------------
 @pytest.fixture
 def database():
     db = Database()

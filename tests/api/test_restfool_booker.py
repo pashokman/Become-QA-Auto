@@ -41,19 +41,19 @@ UPDATE_BOOKING_DATA = {
 
 # Tests ---------------------------------------------------------------------------------------------
 # Method that add additional info string in logs about start of testing this module.
-@pytest.mark.restbooker
+@pytest.mark.restfool_booker_api
 def test_start(restbooker):
     restbooker.start()
 
 
-@pytest.mark.restbooker
+@pytest.mark.restfool_booker_api
 def test_auth(restbooker):
     token = restbooker.auth(AUTH_DATA)
 
     assert len(token) != 0
 
 
-@pytest.mark.restbooker
+@pytest.mark.restfool_booker_api
 def test_booking_creating(restbooker):
     new_booking_response = restbooker.create_booking(NEW_BOOKING_DATA)
 
@@ -67,7 +67,7 @@ def test_booking_creating(restbooker):
     restbooker.log.info("Created booking object is equal to expected booking object.")
 
 
-@pytest.mark.restbooker
+@pytest.mark.restfool_booker_api
 def test_booking_getting(restbooker):
     new_booking_response = restbooker.create_booking(NEW_BOOKING_DATA)
     get_booking_response = restbooker.get_booking(new_booking_response["bookingid"], 200)
@@ -77,7 +77,7 @@ def test_booking_getting(restbooker):
     restbooker.log.info("Getted booking object is equal to expected booking object.")
 
 
-@pytest.mark.restbooker
+@pytest.mark.restfool_booker_api
 def test_booking_updating(restbooker):
     token = restbooker.auth(AUTH_DATA)
     new_booking_response = restbooker.create_booking(NEW_BOOKING_DATA)
@@ -90,7 +90,7 @@ def test_booking_updating(restbooker):
     restbooker.log.info("Updated booking object is equal to expected booking object.")
 
 
-@pytest.mark.restbooker
+@pytest.mark.restfool_booker_api
 def test_booking_deleting(restbooker):
     token = restbooker.auth(AUTH_DATA)
     new_booking_response = restbooker.create_booking(NEW_BOOKING_DATA)
@@ -102,6 +102,6 @@ def test_booking_deleting(restbooker):
 
 
 # Method that add additional info string in logs about end of testing this module.
-@pytest.mark.restbooker
+@pytest.mark.restfool_booker_api
 def test_end(restbooker):
     restbooker.end()

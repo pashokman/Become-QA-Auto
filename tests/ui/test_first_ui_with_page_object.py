@@ -3,7 +3,7 @@
 import pytest
 
 
-@pytest.mark.git_hub_ui
+@pytest.mark.first_ui
 def test_page_title(sign_in_page):
     # Open page
     sign_in_page.go_to()
@@ -12,7 +12,7 @@ def test_page_title(sign_in_page):
     assert sign_in_page.get_title() == "Sign in to GitHub · GitHub"
 
 
-@pytest.mark.git_hub_ui
+@pytest.mark.first_ui
 def test_incorrect_username_and_password_error_message(sign_in_page):
     # Open page
     sign_in_page.go_to()

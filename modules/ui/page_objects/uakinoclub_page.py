@@ -1,3 +1,10 @@
+"""
+Here I continue practise to work with elements selectors, 
+saving multiple elements into a list and work with the list of these elements, 
+adding logging,
+making complex methods, like "search_some_movie" for a DRY (don't repeat yourself) practice in tests
+"""
+
 from modules.ui.page_objects.base_page import BasePage
 from utils.logger import Loger
 
@@ -7,27 +14,24 @@ class UAKinoClubPage(BasePage):
     log = Loger.custom_logger()
 
     MAIN_URL = 'https://uakino.club/'
-    RELATIVE_MOVIES = [
-        'Форсаж', 'Подвійний Форсаж', 'Потрійний форсаж: Токійський дрифт', 
-        'Бандити [передісторія Форсаж 4]', 'Форсаж 4', 'Форсаж 5: Пограбування в Ріо', 
-        'Форсаж 6 [Розширена версія]', 'Форсаж 7 [Розширена версія]', 'Форсаж 8', 
-        'Форсаж 9: Нестримна сага', 'Форсаж X'
-        ]
+
 
     def __init__(self):
         super().__init__()
 
-    
+
+    # Methods that add additional info string in logs about start/end of testing this module. ------------------------    
     def start(self):
-        text = "TESTING PERSONAL_UI"
+        text = "TESTING UAKINOCLUB_UI"
         self.log.critical(f"{text:.^75}")
+
 
     def end(self):
-        text = "SUCCESSFUL END OF TESTING - PERSONAL_UI"
+        text = "SUCCESSFUL END OF TESTING - UAKINOCLUB_UI"
         self.log.critical(f"{text:.^75}")
 
 
-        # Steps to reproduce methods
+    # Steps to reproduce methods -------------------------------------------------------------------------------------
     def search_some_movie(self, movie_name):
         self.go_to(UAKinoClubPage.MAIN_URL)
         
@@ -50,6 +54,24 @@ class UAKinoClubPage(BasePage):
 
     def get_searched_movie_count(self):
         return self.find_elements_by_xpath("//div[@class='movie-item short-item']")
+    
+
+    def get_movie_name(self):
+        return self.find_element_by_class("origintitle").text
+    
+    
+    def get_relative_movies(self):
+        movie_list_element = self.find_elements_by_xpath("//div[@class='rel-item']")[0]
+        self.scroll_into_view(movie_list_element)        
+        movie_list = self.find_elements_by_xpath("//div[@class='rel-item']//a")
+        text_movie_list = []
+        
+        for i in range(len(movie_list)):
+            text_movie_list.append(movie_list[i].text)
+        
+        self.log.debug("Save relative movies into a list.")
+
+        return text_movie_list
 
 
     def open_first_result_movie(self):
@@ -73,38 +95,3 @@ class UAKinoClubPage(BasePage):
         movie = self.find_element_by_xpath(f"//div[@class='rel-item'][{number}]") # Подвійний форсаж
         movie.click()
         self.log.debug(f"Open relative movie {number}.")
-
-
-        # Assertions
-    def result_movie_count_assertion(self, count):
-        result_movie_count = self.find_elements_by_xpath("//div[@class='movie-item short-item']")
-        
-        assert len(result_movie_count) == count
-        self.log.info(f"! Successful ! Result movies count is equal to needed value - {count}.")
-
-    def movie_name_assertion(self, name):
-        movie_name = self.find_element_by_class("origintitle")
-        assert movie_name.text == name
-        self.log.info(f"! Successful ! Movie name is equal to needed value - {name}.")
-        
-
-    def first_movie_relatives_assertion(self):
-        movie_list_element = self.find_elements_by_xpath("//div[@class='rel-item']")[0]
-        self.scroll_into_view(movie_list_element)        
-        movie_list = self.find_elements_by_xpath("//div[@class='rel-item']//a")
-        text_movie_list = []
-        for i in range(len(movie_list)):
-            text_movie_list.append(movie_list[i].text)
-
-        assert UAKinoClubPage.RELATIVE_MOVIES == text_movie_list
-        self.log.info(f"! Successful ! Relative movie list is equal to needed value - {UAKinoClubPage.RELATIVE_MOVIES}.")
-        
-    def movie_year_assertion(self, year_from_list, year):
-        assert year_from_list == year
-        self.log.info(f"! Successful ! Movie year is equal to needed value - {year}.")
-
-    def movie_message_assertion(self, message):
-        result = self.find_element_by_id("dle-speedbar")
-
-        assert result.text == message
-        self.log.info(f"! Successful ! Movie message is equal to needed value - {message}.")

@@ -20,27 +20,20 @@ class SignInPage(BasePage):
     def try_login(self, username, password):
         # Find login field
         login_elem = self.find_element_by_id("login_field")        
-        
         # Enter nonexisting username/email
         login_elem.send_keys(f'{username}')     
-        
         # Find password field
         password_elem = self.find_element_by_id("password")        
-        
         # Enter wrong password
         password_elem.send_keys(f'{password}')      
-        
         # Find button 'Login'
         btn_login = self.find_element_by_name('commit')        
-        
         # Click on btn
         btn_login.click()
 
 
     def get_err_message(self):
-        err_message = self.find_element_by_class("js-flash-alert")
-        
-        return err_message
+        return self.find_element_by_class("js-flash-alert")
         
 
     def get_title(self):

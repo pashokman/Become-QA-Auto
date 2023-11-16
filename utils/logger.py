@@ -1,7 +1,9 @@
 import logging
 import inspect
 
+
 class Loger():
+    
     def custom_logger(log_level=logging.DEBUG):
         # Set calss/method name from where its called
         logger_name = inspect.stack()[1][3]
