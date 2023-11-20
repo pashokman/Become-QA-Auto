@@ -1,17 +1,21 @@
 import pytest
 
-# API modules-------------------------------------------
+# API modules --------------------------------------------------------------------------------------------------------
 from modules.api.clients.github import GitHub
 from modules.api.clients.pokemon import Pokemon
 from modules.api.clients.restfool_booker import RestBooker
 
-# Database module-------------------------------------------
+# Database module ----------------------------------------------------------------------------------------------------
 from modules.common.database import Database
 
-# UI pages modules-------------------------------------------
-from modules.ui.page_objects.first_ui_page import SignInPage
-from modules.ui.page_objects.uakinoclub_page import UAKinoClubPage
-from modules.ui.page_objects.herokuapp_page import HerokuAppPage
+# UI pages modules ---------------------------------------------------------------------------------------------------
+# study1
+from modules.ui.page_objects.study1.first_ui_page import SignInPage
+from modules.ui.page_objects.study1.uakinoclub_page import UAKinoClubPage
+from modules.ui.page_objects.study1.herokuapp_page import HerokuAppPage
+
+# study2
+from modules.ui.page_objects.study2.general_page import GeneralPage
 
 
 class User:
@@ -39,7 +43,7 @@ def user():
     user.remove()
 
 
-# API fixtures-------------------------------------------
+# API fixtures -------------------------------------------------------------------------------------------------------
 @pytest.fixture
 def github_api():
     api = GitHub()
@@ -61,7 +65,7 @@ def restbooker():
     yield api
 
 
-# Database fixtures-------------------------------------------
+# Database fixtures --------------------------------------------------------------------------------------------------
 @pytest.fixture
 def database():
     db = Database()
@@ -69,7 +73,7 @@ def database():
     yield db
 
 
-# UI fixtures-------------------------------------------
+# UI study1 fixtures -------------------------------------------------------------------------------------------------
 @pytest.fixture
 def sign_in_page():
     page = SignInPage()
@@ -95,3 +99,26 @@ def herokuapp():
     yield page
 
     page.close()
+
+
+# UI study2 fixtures -------------------------------------------------------------------------------------------------
+@pytest.fixture()
+def google_cloud():
+    general_page = GeneralPage()
+    general_page.go_to(general_page.CLOUD_URL)
+
+    yield general_page
+
+    general_page.close()
+
+
+@pytest.fixture()
+def google_calc():
+    general_page = GeneralPage()
+    general_page.go_to(general_page.CALC_URL)
+    general_page.fill_the_calc_form(4,'free','n1','CP-COMPUTEENGINE-VMIMAGE-N1-STANDARD-8',
+                                    'NVIDIA_TESLA_V100','1','2','europe-west3','1')
+
+    yield general_page
+
+    general_page.close()

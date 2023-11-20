@@ -8,7 +8,7 @@ Here I learned how to:
 import pytest
 
     
-# Test objects ---------------------------------------------------------------------------------------------
+# Test objects (data) ------------------------------------------------------------------------------------------------
 AUTH_DATA = {
     "username" : "admin",
     "password" : "password123"
@@ -39,8 +39,8 @@ UPDATE_BOOKING_DATA = {
 }
 
 
-# Tests ---------------------------------------------------------------------------------------------
-# Method that add additional info string in logs about start of testing this module.
+# Tests --------------------------------------------------------------------------------------------------------------
+# Method that add additional info string in logs about start of testing this module. ---------------------------------
 @pytest.mark.restfool_booker_api
 def test_start(restbooker):
     restbooker.start()
@@ -64,8 +64,6 @@ def test_booking_creating(restbooker):
 
     assert expected_result == new_booking_response
 
-    restbooker.log.info("Created booking object is equal to expected booking object.")
-
 
 @pytest.mark.restfool_booker_api
 def test_booking_getting(restbooker):
@@ -73,8 +71,6 @@ def test_booking_getting(restbooker):
     get_booking_response = restbooker.get_booking(new_booking_response["bookingid"], 200)
 
     assert get_booking_response == NEW_BOOKING_DATA
-
-    restbooker.log.info("Getted booking object is equal to expected booking object.")
 
 
 @pytest.mark.restfool_booker_api
@@ -87,8 +83,6 @@ def test_booking_updating(restbooker):
     assert update_booking_response == UPDATE_BOOKING_DATA    
     assert get_booking_response == UPDATE_BOOKING_DATA
 
-    restbooker.log.info("Updated booking object is equal to expected booking object.")
-
 
 @pytest.mark.restfool_booker_api
 def test_booking_deleting(restbooker):
@@ -98,10 +92,9 @@ def test_booking_deleting(restbooker):
     get_booking_response = restbooker.get_booking(new_booking_response["bookingid"], 404)
 
     assert get_booking_response == None
-    restbooker.log.info("Deleting of booking object is successful.")
 
 
-# Method that add additional info string in logs about end of testing this module.
+# Method that add additional info string in logs about end of testing this module. -----------------------------------
 @pytest.mark.restfool_booker_api
 def test_end(restbooker):
     restbooker.end()

@@ -5,13 +5,14 @@ adding logging,
 making complex methods, like "search_some_movie" for a DRY (don't repeat yourself) practice in tests
 """
 
-from modules.ui.page_objects.base_page import BasePage
+from modules.ui.page_objects.study1.base_page import BasePage
 from utils.logger import Loger
 
 
-class UAKinoClubPage(BasePage):
+LOG = Loger.custom_logger()
 
-    log = Loger.custom_logger()
+
+class UAKinoClubPage(BasePage):
 
     MAIN_URL = 'https://uakino.club/'
 
@@ -23,12 +24,12 @@ class UAKinoClubPage(BasePage):
     # Methods that add additional info string in logs about start/end of testing this module. ------------------------    
     def start(self):
         text = "TESTING UAKINOCLUB_UI"
-        self.log.critical(f"{text:.^75}")
+        LOG.critical(f"{text:.^75}")
 
 
     def end(self):
         text = "SUCCESSFUL END OF TESTING - UAKINOCLUB_UI"
-        self.log.critical(f"{text:.^75}")
+        LOG.critical(f"{text:.^75}")
 
 
     # Steps to reproduce methods -------------------------------------------------------------------------------------
@@ -37,15 +38,15 @@ class UAKinoClubPage(BasePage):
         
         search_btn = self.find_element_by_id('show-search')
         search_btn.click()
-        self.log.debug("Open search field.")
+        LOG.debug("Open search field.")
 
         search_field = self.find_element_by_id('ajax_search')
         search_field.send_keys(f'{movie_name}')
-        self.log.debug(f"Enter searched value into search field - {movie_name}.")
+        LOG.debug(f"Enter searched value into search field - {movie_name}.")
 
         submit_search_btn = self.find_element_by_xpath("//button[contains(text(),'Знайти')]")
         submit_search_btn.click()
-        self.log.debug("Start searching.")
+        LOG.debug("Start searching.")
 
 
     def get_movie_message(self):
@@ -69,7 +70,7 @@ class UAKinoClubPage(BasePage):
         for i in range(len(movie_list)):
             text_movie_list.append(movie_list[i].text)
         
-        self.log.debug("Save relative movies into a list.")
+        LOG.debug("Save relative movies into a list.")
 
         return text_movie_list
 
@@ -78,7 +79,7 @@ class UAKinoClubPage(BasePage):
         first_movie = self.find_elements_by_xpath("//div[@class='movie-item short-item']")[0]
         self.scroll_into_view(first_movie)
         first_movie.click()
-        self.log.debug("Open first result movie.")
+        LOG.debug("Open first result movie.")
 
 
     def save_relative_movies_years(self):
@@ -86,7 +87,7 @@ class UAKinoClubPage(BasePage):
         text_relative_movies_years = []
         for i in range(len(relative_movies_years)):
             text_relative_movies_years.append(relative_movies_years[i].text)
-        self.log.debug("Save movie years into a list.")
+        LOG.debug("Save movie years into a list.")
         
         return text_relative_movies_years
     
@@ -94,4 +95,4 @@ class UAKinoClubPage(BasePage):
     def open_relative_movie(self, number): #starts from 1
         movie = self.find_element_by_xpath(f"//div[@class='rel-item'][{number}]") # Подвійний форсаж
         movie.click()
-        self.log.debug(f"Open relative movie {number}.")
+        LOG.debug(f"Open relative movie {number}.")

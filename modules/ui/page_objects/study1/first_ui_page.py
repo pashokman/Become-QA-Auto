@@ -2,7 +2,7 @@
 Here I create my first SignInPage class based on BasePage class with it's own methods.
 """
 
-from modules.ui.page_objects.base_page import BasePage
+from modules.ui.page_objects.study1.base_page import BasePage
 
 
 class SignInPage(BasePage):

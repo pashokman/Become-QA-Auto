@@ -6,13 +6,13 @@ JOIN, SUM, MAX, SELECT, INSERT, DELETE, UPDATE.
 import pytest
 
 
-# Testing database connection -------------------------------------------------------------------------------------
+# Testing database connection ----------------------------------------------------------------------------------------
 @pytest.mark.database
 def test_database_connection(database):
     database.test_connection()
 
 
-# Testing products ------------------------------------------------------------------------------------------------
+# Testing products ---------------------------------------------------------------------------------------------------
 @pytest.mark.database
 def test_products_quantity_sum(database):
     sum = database.get_products_qnt_sum()
@@ -52,7 +52,7 @@ def test_product_delete(database):
     assert len(qnt) == 0
 
 
-# Testing users ------------------------------------------------------------------------------------------------ 
+# Testing users ------------------------------------------------------------------------------------------------------ 
 @pytest.mark.database
 def test_check_user_sergii(database):
     user = database.get_user_address_by_name('Sergii')
@@ -69,7 +69,7 @@ def test_check_all_users(database):
     print(f'\n{users}')
 
 
-# Testing orders -----------------------------------------------------------------------------------------------
+# Testing orders -----------------------------------------------------------------------------------------------------
 @pytest.mark.database
 def test_detailed_orders(database):
     orders = database.get_detailed_orders()
@@ -84,7 +84,7 @@ def test_detailed_orders(database):
     assert orders[0][3] == 'з цукром'
 
 
-# Testing customers --------------------------------------------------------------------------------------------
+# Testing customers --------------------------------------------------------------------------------------------------
 @pytest.mark.database
 def test_customer_insert(database):
     database.insert_new_customer(88, 'Pavlo', 'Shevchenka 10', 'New York', '56ZMU78', 'USA')

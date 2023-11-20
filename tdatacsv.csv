@@ -1,0 +1,2 @@
+searched_value,instances,os_software,series,machine_type,gpus_type,num_gpus,num_ssd,location,com_usage,sum
+Google Cloud Platform Pricing Calculator,4,free,n1,CP-COMPUTEENGINE-VMIMAGE-N1-STANDARD-8,NVIDIA_TESLA_V100,1,2,europe-west3,1,"1,081.20"

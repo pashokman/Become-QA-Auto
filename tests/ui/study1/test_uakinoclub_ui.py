@@ -41,7 +41,6 @@ def test_non_existing_movie_search_message(uakinoclub):
     uakinoclub.search_some_movie(NONE_EXISTING_MOVIE_NAME)
 
     assert uakinoclub.get_movie_message() == NONE_EXISTING_MOVIE_MESSAGE
-    uakinoclub.log.info(f"! Successful ! Movie message is equal to needed value (not exist).")
 
 
 @pytest.mark.uakinoclub_ui
@@ -49,7 +48,6 @@ def test_existing_movie_search_message(uakinoclub):
     uakinoclub.search_some_movie(EXISTING_MOVIE_SEARCH_NAME)
 
     assert uakinoclub.get_movie_message() == EXISTING_MOVIE_MESSAGE
-    uakinoclub.log.info(f"! Successful ! Movie message is equal to needed value (exist).")
 
 
 @pytest.mark.uakinoclub_ui
@@ -58,7 +56,6 @@ def test_search_results_count_validation(uakinoclub):
     result_movie_count = uakinoclub.get_searched_movie_count()
 
     assert len(result_movie_count) == EXISTING_MOVIE_COUNT
-    uakinoclub.log.info(f"! Successful ! Result movies count is equal to needed value - {EXISTING_MOVIE_COUNT}.")
 
 
 @pytest.mark.uakinoclub_ui
@@ -67,7 +64,6 @@ def test_first_search_result_validation(uakinoclub):
     uakinoclub.open_first_result_movie()
 
     assert uakinoclub.get_movie_name() == EXPECTED_SEARCHED_MOVIE_NAME
-    uakinoclub.log.info(f"! Successful ! Movie name is equal to needed value - {EXPECTED_SEARCHED_MOVIE_NAME}.")
 
 
 @pytest.mark.uakinoclub_ui
@@ -76,7 +72,6 @@ def test_first_searched_result_relative_movies(uakinoclub):
     uakinoclub.open_first_result_movie()
 
     assert uakinoclub.get_relative_movies() == EXPECTED_RELATIVE_MOVIES
-    uakinoclub.log.info(f"! Successful ! Relative movie list is equal to needed value.")
 
 
 @pytest.mark.uakinoclub_ui
@@ -87,7 +82,6 @@ def test_second_related_movie_year(uakinoclub):
     uakinoclub.open_relative_movie(2)
 
     assert years_list[1] == EXPECTED_SECOND_RELATIVE_MOVIE_YEAR
-    uakinoclub.log.info(f"! Successful ! Movie year is equal to needed value - {EXPECTED_SECOND_RELATIVE_MOVIE_YEAR}.")
 
 
 @pytest.mark.uakinoclub_ui
@@ -98,7 +92,6 @@ def test_third_related_movie_year(uakinoclub):
     uakinoclub.open_relative_movie(3)
 
     assert years_list[2] == EXPECTED_THIRD_RELATIVE_MOVIE_YEAR
-    uakinoclub.log.info(f"! Successful ! Movie year is equal to needed value - {EXPECTED_THIRD_RELATIVE_MOVIE_YEAR}.")
 
 
 # Method that add additional info string in logs about end of testing this module. -----------------------------------
