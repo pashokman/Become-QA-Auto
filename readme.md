@@ -1,5 +1,5 @@
 # My degree project from course - Automation Software Testing by Prometheus and GlobalLogic
-In this framework I study to test API, UI, Database and it's separated properly in different folders.\
+In this framework I study to test API, UI, Database and it's separated properly in different folders.
 
 How I describe framework and what I tested:
 >chapter of a framework
@@ -55,18 +55,18 @@ Every folder consists from one-few modules in each one I make tests of some func
     4. In the search results, click "Google Cloud Platform Pricing Calculator" and go to the calculator page.
     5. Activate the COMPUTE ENGINE section at the top of the page.
     6. Fill in the form with the following data:
-        a. Number of instances: 4.
-        b. What are these instances for ?: leave blank.
-        c. Operating System / Software: Free: Debian, CentOS, CoreOS, Ubuntu, or other User Provided OS.
-        d. VM Class: Regular.
-        e. Series: N1.
-        f. Machine type: n1-standard-8 (vCPUs: 8, RAM: 30 GB).
-        g. Select Add GPUs.
-            1. Number of GPUs: 1.
-            2. GPU type: NVIDIA Tesla V100.
-        h. Local SSD: 2x375 Gb.
-        i. Datacenter location: Frankfurt (europe-west3).
-        j. Commited usage: 1 Year.
+        a. Number of instances: 4.\
+        b. What are these instances for ?: leave blank.\
+        c. Operating System / Software: Free: Debian, CentOS, CoreOS, Ubuntu, or other User Provided OS.\
+        d. VM Class: Regular.\
+        e. Series: N1.\
+        f. Machine type: n1-standard-8 (vCPUs: 8, RAM: 30 GB).\
+        g. Select Add GPUs.\
+            1. Number of GPUs: 1.\
+            2. GPU type: NVIDIA Tesla V100.\
+        h. Local SSD: 2x375 Gb.\
+        i. Datacenter location: Frankfurt (europe-west3).\
+        j. Commited usage: 1 Year.\
     7. Click Add to Estimate.
     8. Select EMAIL ESTIMATE.
     9. In a new tab, open https://10minutemail.com or a similar service for generating temporary emails.
