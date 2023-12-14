@@ -16,7 +16,7 @@ Every folder consists from one-few modules in each one I make tests of some func
 * api
     + test_api - learned how to send API requests;
     + test_fixture - learned how to use fixtures in tests;
-    + test_github_api - made some tests of of GitHub API:
+    + test_github_api - made some tests of GitHub API:
         - commits (commit_list_not_empty, first_commit_author_name, first_commit_author_email), 
         - users (user_exists, user_not_exists);
         - repo (repo_can_be_found, repo_can_be_found_count);
@@ -29,7 +29,7 @@ Every folder consists from one-few modules in each one I make tests of some func
 * database
     + test_database - learned how to use methods JOIN, SUM, MAX, SELECT, INSERT, DELETE, UPDATE in database testing.
 * ui/page_objects
-    + study1 - folder with first steps in auto testing.
+    + study1 - folder with first steps in auto testing:
         - test_first_ui - learned how to work with Selenium webdriver, open page, find element, 
         enter some value into a field, click on element, get text from an element, get page title;
         - test_first_ui_with_page_object - learned how to use POM to previous test 
@@ -54,7 +54,7 @@ Every folder consists from one-few modules in each one I make tests of some func
     3. Start the search by clicking the search button.
     4. In the search results, click "Google Cloud Platform Pricing Calculator" and go to the calculator page.
     5. Activate the COMPUTE ENGINE section at the top of the page.
-    6. Fill in the form with the following data:
+    6. Fill in the form with the following data:\
         a. Number of instances: 4.\
         b. What are these instances for ?: leave blank.\
         c. Operating System / Software: Free: Debian, CentOS, CoreOS, Ubuntu, or other User Provided OS.\
@@ -66,7 +66,7 @@ Every folder consists from one-few modules in each one I make tests of some func
             2. GPU type: NVIDIA Tesla V100.\
         h. Local SSD: 2x375 Gb.\
         i. Datacenter location: Frankfurt (europe-west3).\
-        j. Commited usage: 1 Year.\
+        j. Commited usage: 1 Year.
     7. Click Add to Estimate.
     8. Select EMAIL ESTIMATE.
     9. In a new tab, open https://10minutemail.com or a similar service for generating temporary emails.
