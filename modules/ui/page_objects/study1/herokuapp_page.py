@@ -17,12 +17,12 @@ class HerokuAppPage(BasePage):
     # Methods that add additional info string in logs about start/end of testing this module. ------------------------
     def start(self):
         text = "TESTING HEROKUAPP_UI"
-        LOG.critical(f"{text:.^75}")
+        LOG.warning(f"{text:.^75}")
 
 
     def end(self):
         text = "SUCCESSFUL END OF TESTING - HEROKUAPP_UI"
-        LOG.critical(f"{text:.^75}")
+        LOG.warning(f"{text:.^75}")
 
 
     # Steps to reproduce methods -------------------------------------------------------------------------------------

@@ -12,12 +12,12 @@ class RestBooker():
     # Methods that add additional info string in logs about start/end of testing this module. ------------------------
     def start(self):
         text = "TESTING REQRES"
-        LOG.critical(f"{text:.^75}")        
+        LOG.warning(f"{text:.^75}")        
 
 
     def end(self):
         text = "SUCCESSFUL END OF TESTING - REQRES"
-        LOG.critical(f"{text:.^75}")        
+        LOG.warning(f"{text:.^75}")        
 
 
     # Steps to reproduce methods -------------------------------------------------------------------------------------

@@ -36,8 +36,8 @@ def test_check_incorrect_username():
     # Find error message field
     err_field = driver.find_element(By.CLASS_NAME, 'js-flash-alert')
 
-    assert err_field.text == "Incorrect username or password."
-    assert driver.title == "Sign in to GitHub · GitHub"
+    assert err_field.text == "Incorrect username or password.", "Error message error"
+    assert driver.title == "Sign in to GitHub · GitHub", "First UI page title error"
 
     # Close browser
     driver.close()
