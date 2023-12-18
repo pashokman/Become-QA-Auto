@@ -21,7 +21,7 @@ class GeneralPage(BasePage):
     SEARCH_RESULT = "//div[@class='gs-title']//b[contains(text(),'Google Cloud Pricing Calculator')]"
 
     # Work with calculator -------------------------------------------------------------------------------------------
-    CALC_URL = "https://cloud.google.com/products/calculator"
+    CALC_URL = "https://cloud.google.com/products/calculator-legacy"
     EXTERNAL_IFRAME = 0
     INNER_IFRAME = "myFrame"
     COMPUTE_ENGINE_BTN = '//md-tab-item[@tabindex="0"]'
@@ -34,11 +34,11 @@ class GeneralPage(BasePage):
     MACHINE_TYPE_VALUES = '//div[@id="select_container_129"]//md-option'
     ADD_GPUS_CHECKBOX = '//md-checkbox[@aria-label="Add GPUs"]'
     GPUS_TYPE = '//md-select[@aria-label="GPU type"]'
-    GPUS_TYPE_VALUES = '//div[@id="select_container_510"]//md-option'
-    NUMBER_OF_GPUS = '//md-select[@id="select_511"]'
-    NUMBER_OF_GPUS_VALUES = '//div[@id="select_container_512"]//md-option'
-    SSD = '//md-select[@id="select_468"]'
-    SSD_VALUES = '//div[@id="select_container_469"]//md-option'
+    GPUS_TYPE_VALUES = '//div[@id="select_container_512"]//md-option'
+    NUMBER_OF_GPUS = '//md-select[@id="select_513"]'
+    NUMBER_OF_GPUS_VALUES = '//div[@id="select_container_514"]//md-option'
+    SSD = '//md-select[@id="select_470"]'
+    SSD_VALUES = '//div[@id="select_container_471"]//md-option'
     DATACENTER = '//md-select[@id="select_134"]'
     DATACENTER_VALUES = '//div[@id="select_container_135"]//md-option'
     COMMITTED_USAGE = '//md-select[@id="select_141"]'
@@ -505,8 +505,8 @@ class GeneralPage(BasePage):
     def spam_close(self):
         self.switch_to_frame(self.SPAM_MAIN_IFRAME)
         LOG.debug("Enter into external mail iframe.")
-        self.switch_to_frame(self.SPAM_NEXT_IFRAME)
-        LOG.debug("Enter into inner mail iframe.")
+        # self.switch_to_frame(self.SPAM_NEXT_IFRAME) # After last changes working without entering in inner iframe
+        # LOG.debug("Enter into inner mail iframe.")
         self.spam_box_close().click()
         self.get_out_of_frames()
         LOG.debug("Spam closed.")

@@ -18,7 +18,7 @@ def test_second_request():
 
     assert body["name"] == "Chris Wanstrath", "Name does not equal to - Chris Wanstrath"
     assert response.status_code == 200, "Status code is not - 200"
-    assert headers["Server"] == "GitHub.com" - "Server name is not - GitHub.com"
+    assert headers["Server"] == "GitHub.com", "Server name is not - GitHub.com"
 
 
 @pytest.mark.api
