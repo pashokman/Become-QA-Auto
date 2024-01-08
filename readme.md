@@ -24,8 +24,13 @@ Every folder consists from one-few modules in each one I make tests of some func
     + test_pokemon_api - learned how to return API response through the fixture 
     (pokemon_first_form_name, pokemon_base_experience, pokemon_id, pokemon_first_type_name);
     + test_restfool_booker - learned how to work with CRUD operations through API, 
-    using prepeared objects for testing and add logging into tests and class methods
-    (auth, booking_creating, booking_getting, booking_updating, booking_deleting).
+        - using prepeared objects for testing and add logging into tests and class methods
+        (auth, booking_creating, booking_getting, booking_updating, booking_deleting);
+        - add additional conditions to page methods (return status code if it does not match to input status code);
+        - import test date from another file;
+        - I solved problem vs copy (use deepcopy), to change only copied dictionary, not original one;
+        - made test of creating booking without body parameters;
+        - add error messages into variable.
 * database
     + test_database - learned how to use methods JOIN, SUM, MAX, SELECT, INSERT, DELETE, UPDATE in database testing.
 * ui/page_objects

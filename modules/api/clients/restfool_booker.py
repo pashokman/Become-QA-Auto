@@ -31,15 +31,18 @@ class RestBooker():
         return body["token"]
         
 
-    def create_booking(self, new_booking):
+    def create_booking(self, new_booking, status_code):
         request = requests.post(f"{RestBooker.MAIN_URL}/booking", json=new_booking)
 
-        assert request.status_code == 200
+        assert request.status_code == status_code
         LOG.debug("Create booking successful.")
 
-        body = request.json()
-        return body
-    
+        if request.status_code == 200:
+            body = request.json()
+            return body
+        else:
+            return request.status_code
+        
 
     def get_booking(self, booking_id, status_code):
         request = requests.get(f"{RestBooker.MAIN_URL}/booking/{booking_id}")
@@ -50,6 +53,8 @@ class RestBooker():
         if status_code == 200:
             body = request.json()
             return body
+        else:
+            return request.status_code
     
 
     def update_booking(self, token, booking_id, update_booking_data):
