@@ -6,7 +6,6 @@ from modules.ui.page_objects.study1.base_page import BasePage
 
 
 class SignInPage(BasePage):
-
     URL = "https://github.com/login"
 
     def __init__(self):

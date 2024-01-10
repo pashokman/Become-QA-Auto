@@ -30,7 +30,8 @@ Every folder consists from one-few modules in each one I make tests of some func
         - import test date from another file;
         - I solved problem vs copy (use deepcopy), to change only copied dictionary, not original one;
         - made test of creating booking without body parameters;
-        - add error messages into variable.
+        - add error messages into variable;
+        - use try/except blocks into tests.
 * database
     + test_database - learned how to use methods JOIN, SUM, MAX, SELECT, INSERT, DELETE, UPDATE in database testing.
 * ui/page_objects

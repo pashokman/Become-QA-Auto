@@ -1,13 +1,12 @@
 from modules.ui.page_objects.study1.base_page import BasePage
-from utils.logger import Loger
+from utils.logger import Logger
 from selenium.webdriver.common.action_chains import ActionChains
 
 
-LOG = Loger.custom_logger()
+LOG = Logger.custom_logger()
 
 
 class HerokuAppPage(BasePage):
-
     MAIN_URL = "https://the-internet.herokuapp.com/"
 
     def __init__(self):

@@ -2,7 +2,7 @@ import logging
 import inspect
 
 
-class Loger():
+class Logger():
     
     def custom_logger(log_level=logging.DEBUG):
         # Set calss/method name from where its called

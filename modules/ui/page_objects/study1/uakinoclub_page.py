@@ -6,14 +6,13 @@ making complex methods, like "search_some_movie" for a DRY (don't repeat yoursel
 """
 
 from modules.ui.page_objects.study1.base_page import BasePage
-from utils.logger import Loger
+from utils.logger import Logger
 
 
-LOG = Loger.custom_logger()
+LOG = Logger.custom_logger()
 
 
 class UAKinoClubPage(BasePage):
-
     MAIN_URL = 'https://uakino.club/'
 
 

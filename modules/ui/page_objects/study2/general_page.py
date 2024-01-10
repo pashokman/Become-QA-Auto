@@ -3,15 +3,14 @@ from selenium.webdriver.common.keys import Keys
 
 from modules.ui.page_objects.study2.base_page import BasePage
 
-from utils.logger import Loger
+from utils.logger import Logger
 from utils.additional_functions import AdditionalFunctions
 
 
-LOG = Loger.custom_logger()
+LOG = Logger.custom_logger()
 
 
 class GeneralPage(BasePage):
-
     ####### TEST BUILD ELEMENTS/CONSTANTS ----------------------------------------------------------------------------
     # Search calculator ----------------------------------------------------------------------------------------------
     CLOUD_URL = "https://cloud.google.com/"
