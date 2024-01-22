@@ -53,6 +53,8 @@ Every folder consists from one-few modules in each one I make tests of some func
         - switch windows(browser tabs),
         - add external answer to asserts,
         - training to uses external module function (AdditionalFunctions.select_item_from_list).
+* run tests in Jenkins
+    + added "result_jenkins.png" to project root folder (some UI tests fail in Jenkins, but succeed on local machine)
     
     ### UI TASK - test_estimate_calc.py
     1. Open https://cloud.google.com/.
