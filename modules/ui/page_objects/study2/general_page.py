@@ -24,24 +24,24 @@ class GeneralPage(BasePage):
     EXTERNAL_IFRAME = 0
     INNER_IFRAME = "myFrame"
     COMPUTE_ENGINE_BTN = '//md-tab-item[@tabindex="0"]'
-    INSTANCES = '//input[@id="input_101"]'
-    OSSOFTWARE__DD = '//md-select-value[@id="select_value_label_93"]'
-    OS_SOFTWARE_VALUES = '//div[@id="select_container_115"]//md-option'
-    SERIES = '//md-select-value[@id="select_value_label_96"]'
-    SERIES_VALUES = '//div[@id="select_container_127"]//md-option'
-    MACHINE_TYPE = '//md-select-value[@id="select_value_label_97"]'
-    MACHINE_TYPE_VALUES = '//div[@id="select_container_129"]//md-option'
+    INSTANCES = '//input[@aria-label="quantity"]'
+    OSSOFTWARE__DD = '//md-select[contains(@aria-label, "Operating System / Software:")]'
+    OS_SOFTWARE_VALUES = '//md-option'
+    SERIES = '//md-select-value[@id="select_value_label_95"]'
+    SERIES_VALUES = '//md-option'
+    MACHINE_TYPE = '//md-select-value[@id="select_value_label_96"]'
+    MACHINE_TYPE_VALUES = '//md-option'
     ADD_GPUS_CHECKBOX = '//md-checkbox[@aria-label="Add GPUs"]'
     GPUS_TYPE = '//md-select[@aria-label="GPU type"]'
-    GPUS_TYPE_VALUES = '//div[@id="select_container_512"]//md-option'
-    NUMBER_OF_GPUS = '//md-select[@id="select_513"]'
-    NUMBER_OF_GPUS_VALUES = '//div[@id="select_container_514"]//md-option'
-    SSD = '//md-select[@id="select_470"]'
-    SSD_VALUES = '//div[@id="select_container_471"]//md-option'
-    DATACENTER = '//md-select[@id="select_134"]'
-    DATACENTER_VALUES = '//div[@id="select_container_135"]//md-option'
-    COMMITTED_USAGE = '//md-select[@id="select_141"]'
-    COMMITTED_USAGE_VALUES = '//div[@id="select_container_142"]//md-option'
+    GPUS_TYPE_VALUES = '//md-option'
+    NUMBER_OF_GPUS = '//md-select[contains(@aria-label, "Number of GPUs:")]'
+    NUMBER_OF_GPUS_VALUES = '//md-option[@ng-disabled="item.value != 0 && item.value < listingCtrl.minGPU"]'
+    SSD = '//md-select[contains(@aria-label, "Local SSD:")]'
+    SSD_VALUES = '//md-option[@ng-repeat="item in listingCtrl.dynamicSsd.computeServer"]'
+    DATACENTER = '//md-select[contains(@aria-label, "Datacenter location:")]'
+    DATACENTER_VALUES = '//md-option'
+    COMMITTED_USAGE = '//md-select[contains(@aria-label, "Committed usage:")]'
+    COMMITTED_USAGE_VALUES = '//div[@id="select_container_141"]//md-option'
     ESTIMATE_BTN = '//button[contains(text(),"Add to Estimate")]'
     EMAIL_ESTIMATE = '//button[@id="Email Estimate"]'
     EMAIL_FIELD = '//form[@name="emailForm"]//div[3]//input'
@@ -504,8 +504,8 @@ class GeneralPage(BasePage):
     def spam_close(self):
         self.switch_to_frame(self.SPAM_MAIN_IFRAME)
         LOG.debug("Enter into external mail iframe.")
-        # self.switch_to_frame(self.SPAM_NEXT_IFRAME) # After last changes working without entering in inner iframe
-        # LOG.debug("Enter into inner mail iframe.")
+        self.switch_to_frame(self.SPAM_NEXT_IFRAME) 
+        LOG.debug("Enter into inner mail iframe.")
         self.spam_box_close().click()
         self.get_out_of_frames()
         LOG.debug("Spam closed.")

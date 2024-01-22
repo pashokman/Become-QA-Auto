@@ -1,11 +1,14 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
 
 
 class BasePage():
 
     def __init__(self):
-        self.driver = webdriver.Chrome()
+        self.options = Options()
+        self.options.page_load_strategy = 'eager'
+        self.driver = webdriver.Chrome(options=self.options)
         self.driver.maximize_window()
         
         

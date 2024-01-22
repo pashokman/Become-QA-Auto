@@ -46,7 +46,7 @@ def test_non_existing_movie_search_message(uakinoclub):
 @pytest.mark.uakinoclub_ui
 def test_existing_movie_search_message(uakinoclub):
     uakinoclub.search_some_movie(EXISTING_MOVIE_SEARCH_NAME)
-
+    
     assert uakinoclub.get_movie_message() == EXISTING_MOVIE_MESSAGE, "Existing movie meessage test error"
 
 
