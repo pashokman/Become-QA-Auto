@@ -101,3 +101,15 @@ Every folder consists from one-few modules in each one I make tests of some func
 
 * To clean project folder from "__pychache__" (need to be installed "pyclean" module): 
     + '''pyclean .'''
+
+* To run tests and make a report  (need to be installed pytest-html module):
+    + '''python -m pytest -m google_calc --html=report.html --self-contained-html'''
+
+* To get extra test summary for all tests (passed/failed):
+    + '''python -m pytest -m google_calc -rA'''
+
+* To run only tests that have a keyword in test name (message), to run test with different words use or operator (message or task)? to run all test except with keyword (not message):
+    + '''python -m pytest -m google_calc -k message'''
+
+* To make JUnitXML report:
+    + '''python -m pytest -m pokemon_api --junit-xml=report2.xml'''

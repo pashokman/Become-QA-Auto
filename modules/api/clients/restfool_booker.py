@@ -2,7 +2,8 @@ import requests
 from utils.logger import Logger
 
 
-LOG = Logger.custom_logger()
+logger_instance = Logger()
+REST_BOOKER_LOG = logger_instance.get_logger()
 
 
 class RestBooker():
@@ -10,13 +11,13 @@ class RestBooker():
     
     # Methods that add additional info string in logs about start/end of testing this module. ------------------------
     def start(self):
-        text = "TESTING REQRES"
-        LOG.warning(f"{text:.^75}")        
+        text = "TESTING RestBooker"
+        REST_BOOKER_LOG.warning(f"{text:.^75}")        
 
 
     def end(self):
-        text = "SUCCESSFUL END OF TESTING - REQRES"
-        LOG.warning(f"{text:.^75}")        
+        text = "SUCCESSFUL END OF TESTING - RestBooker"
+        REST_BOOKER_LOG.warning(f"{text:.^75}")        
 
 
     # Steps to reproduce methods -------------------------------------------------------------------------------------
@@ -24,7 +25,7 @@ class RestBooker():
         request = requests.post(f"{RestBooker.MAIN_URL}/auth", json=auth_data)
 
         assert request.status_code == 200
-        LOG.debug("Auth successful.")
+        REST_BOOKER_LOG.debug("Auth successful.")
 
         body = request.json()
         return body["token"]
@@ -34,7 +35,7 @@ class RestBooker():
         request = requests.post(f"{RestBooker.MAIN_URL}/booking", json=new_booking)
 
         assert request.status_code == status_code
-        LOG.debug("Create booking successful.")
+        REST_BOOKER_LOG.debug("Create booking successful.")
 
         if request.status_code == 200:
             body = request.json()
@@ -47,7 +48,7 @@ class RestBooker():
         request = requests.get(f"{RestBooker.MAIN_URL}/booking/{booking_id}")
 
         assert request.status_code == status_code
-        LOG.debug("Get booking successful.")
+        REST_BOOKER_LOG.debug("Get booking successful.")
         
         if status_code == 200:
             body = request.json()
@@ -62,7 +63,7 @@ class RestBooker():
                                 headers={"Cookie": f"token={token}"})
 
         assert request.status_code == status_code
-        LOG.debug("Update booking successful.")
+        REST_BOOKER_LOG.debug("Update booking successful.")
 
         if status_code == 200:
             body = request.json()
@@ -76,6 +77,6 @@ class RestBooker():
                                     headers={"Cookie": f"token={token}"})
 
         assert request.status_code == status_code
-        LOG.debug("Delete booking successful.")
+        REST_BOOKER_LOG.debug("Delete booking successful.")
 
         return request.status_code

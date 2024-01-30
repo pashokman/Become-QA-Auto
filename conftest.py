@@ -122,3 +122,8 @@ def google_calc():
     yield general_page
 
     general_page.close()
+
+
+# HTML report configuration ------------------------------------------------------------------------------------------
+def pytest_html_report_title(report):
+    report.title = "Testing project!"

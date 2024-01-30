@@ -3,7 +3,8 @@ from utils.logger import Logger
 from selenium.webdriver.common.action_chains import ActionChains
 
 
-LOG = Logger.custom_logger()
+logger_instance = Logger()
+HEROKU_APP_LOG = logger_instance.get_logger()
 
 
 class HerokuAppPage(BasePage):
@@ -16,28 +17,28 @@ class HerokuAppPage(BasePage):
     # Methods that add additional info string in logs about start/end of testing this module. ------------------------
     def start(self):
         text = "TESTING HEROKUAPP_UI"
-        LOG.warning(f"{text:.^75}")
+        HEROKU_APP_LOG.warning(f"{text:.^75}")
 
 
     def end(self):
         text = "SUCCESSFUL END OF TESTING - HEROKUAPP_UI"
-        LOG.warning(f"{text:.^75}")
+        HEROKU_APP_LOG.warning(f"{text:.^75}")
 
 
     # Steps to reproduce methods -------------------------------------------------------------------------------------
     def go_to_add_remove_elem_page(self):
         self.go_to(HerokuAppPage.MAIN_URL)
-        LOG.debug("Open herokuapp page.")
+        HEROKU_APP_LOG.debug("Open herokuapp page.")
         addRemElemLink = self.find_element_by_xpath("//a[normalize-space()='Add/Remove Elements']")
         addRemElemLink.click()
-        LOG.debug("Click on 'Add/remove element' link.")
+        HEROKU_APP_LOG.debug("Click on 'Add/remove element' link.")
 
 
     def click_add_elem_times(self, numb_click):
         while numb_click > 0:
             self.find_element_by_xpath("//button[normalize-space()='Add Element']").click()
             numb_click -= 1
-            LOG.debug("Click on 'Add Element' button.")
+            HEROKU_APP_LOG.debug("Click on 'Add Element' button.")
 
     
     def get_added_elements_count(self):
@@ -49,15 +50,15 @@ class HerokuAppPage(BasePage):
         while numb_click > 0:
             elem_list[0].click()
             numb_click -= 1
-            LOG.debug("Click on 'Delete' button.")
+            HEROKU_APP_LOG.debug("Click on 'Delete' button.")
 
 
     def go_to_drag_and_drop_page(self):
         self.go_to(HerokuAppPage.MAIN_URL)
-        LOG.debug("Open drag and drop page.")
+        HEROKU_APP_LOG.debug("Open drag and drop page.")
         dragAndDropLink = self.find_element_by_xpath("//a[normalize-space()='Drag and Drop']")
         dragAndDropLink.click()
-        LOG.debug("Click on 'Add Element' button.")
+        HEROKU_APP_LOG.debug("Click on 'Add Element' button.")
 
 
     def drag_and_drop_elem(self):
@@ -66,7 +67,7 @@ class HerokuAppPage(BasePage):
 
         actions = ActionChains(self.driver)
         actions.drag_and_drop(drag_from, drag_to).perform()
-        LOG.debug("Drag and drop elements.")
+        HEROKU_APP_LOG.debug("Drag and drop elements.")
 
 
     def get_drag_and_drop_elem_list(self):

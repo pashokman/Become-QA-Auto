@@ -7,7 +7,8 @@ from utils.logger import Logger
 from utils.additional_functions import AdditionalFunctions
 
 
-LOG = Logger.custom_logger()
+logger_instance = Logger()
+GOOGLE_LOG = logger_instance.get_logger()
 
 
 class GeneralPage(BasePage):
@@ -81,12 +82,12 @@ class GeneralPage(BasePage):
     # Methods that add additional info string in logs about start/end of testing this module. ------------------------    
     def start(self):
         text = "TESTING GOOGLE CALCULATOR UI"
-        LOG.warning(f"{text:.^75}")
+        GOOGLE_LOG.warning(f"{text:.^75}")
 
 
     def end(self):
         text = "SUCCESSFUL END OF TESTING - GOOGLE CALCULATOR UI"
-        LOG.warning(f"{text:.^75}")
+        GOOGLE_LOG.warning(f"{text:.^75}")
 
 
     ####### SEARCH CALCULATOR ----------------------------------------------------------------------------------------
@@ -111,7 +112,7 @@ class GeneralPage(BasePage):
     def find_calculator(self, searched_value):
         self.click_on_search_field()
         self.enter_search_value(searched_value)
-        LOG.debug("Search google cloud calculator.")
+        GOOGLE_LOG.debug("Search google cloud calculator.")
 
 
     ####### OPEN CALCULATOR FROM SEARCH RESULTS METHODS --------------------------------------------------------------
@@ -121,7 +122,7 @@ class GeneralPage(BasePage):
 
     def click_on_search_result(self):
         self.get_search_result().click()
-        LOG.debug("Select needed search result.")
+        GOOGLE_LOG.debug("Select needed search result.")
 
     
     ###### WORK WITH CALCUCATOR METHODS ------------------------------------------------------------------------------
@@ -132,9 +133,9 @@ class GeneralPage(BasePage):
 
     def enter_both_iframes(self, ext_iframe, int_iframe):
         self.switch_to_frame(ext_iframe)
-        LOG.debug("Enter into external  calc iframe.")
+        GOOGLE_LOG.debug("Enter into external  calc iframe.")
         self.switch_to_frame(int_iframe)
-        LOG.debug("Enter into inner calc iframe.")
+        GOOGLE_LOG.debug("Enter into inner calc iframe.")
 
 
     def get_out_of_frames(self):
@@ -148,7 +149,7 @@ class GeneralPage(BasePage):
 
     def click_on_compute_engine_btn(self):
         self.get_compute_engine_btn().click()
-        LOG.debug("Click on the Compute Engine btn.")
+        GOOGLE_LOG.debug("Click on the Compute Engine btn.")
 
 
     # Instances ------------------------------------------------------------------------------------------------------
@@ -159,7 +160,7 @@ class GeneralPage(BasePage):
     def set_instances_value(self, value):
         self.get_instances().click()
         self.get_instances().send_keys(value)
-        LOG.debug("Enter instances value.")
+        GOOGLE_LOG.debug("Enter instances value.")
 
 
     # OS/Software ----------------------------------------------------------------------------------------------------
@@ -171,7 +172,7 @@ class GeneralPage(BasePage):
         self.get_os_software().click()
         os_software_list = self.wait_for_presence_of_all_elements(By.XPATH, self.OS_SOFTWARE_VALUES)
         AdditionalFunctions.select_item_from_list(os_software_list, os_software)
-        LOG.debug("Select Operating System/Software.")
+        GOOGLE_LOG.debug("Select Operating System/Software.")
 
 
     # Series ---------------------------------------------------------------------------------------------------------
@@ -183,7 +184,7 @@ class GeneralPage(BasePage):
         self.get_series().click()
         series_list = self.wait_for_presence_of_all_elements(By.XPATH, self.SERIES_VALUES)
         AdditionalFunctions.select_item_from_list(series_list, series)
-        LOG.debug("Select Series.")
+        GOOGLE_LOG.debug("Select Series.")
 
 
     # Machine Type ---------------------------------------------------------------------------------------------------
@@ -195,7 +196,7 @@ class GeneralPage(BasePage):
         self.get_machine_type().click()
         machine_types_list = self.wait_for_presence_of_all_elements(By.XPATH, self.MACHINE_TYPE_VALUES)
         AdditionalFunctions.select_item_from_list(machine_types_list, machine_type)
-        LOG.debug("Select Machine type.")
+        GOOGLE_LOG.debug("Select Machine type.")
 
 
     # GPUs -----------------------------------------------------------------------------------------------------------
@@ -221,17 +222,17 @@ class GeneralPage(BasePage):
 
     def add_gpus_config(self, gpus_type, num_gpus):
         self.get_add_gpus_checkbox().click()
-        LOG.debug("Turn on GPUs checkbox.")
+        GOOGLE_LOG.debug("Turn on GPUs checkbox.")
 
         self.get_gpus_type_select().click()
         gpus_type_list = self.get_gpus_type_values()
         AdditionalFunctions.select_item_from_list(gpus_type_list, gpus_type)
-        LOG.debug("Select GPUs type.")
+        GOOGLE_LOG.debug("Select GPUs type.")
 
         self.get_gpus_num_select().click()
         num_gpus_list = self.get_gpus_num_values()
         AdditionalFunctions.select_item_from_list(num_gpus_list, num_gpus)
-        LOG.debug("Select GPUs number.")
+        GOOGLE_LOG.debug("Select GPUs number.")
 
 
     # SSD ------------------------------------------------------------------------------------------------------------
@@ -247,7 +248,7 @@ class GeneralPage(BasePage):
         self.get_ssd().click()
         ssd_conf_list = self.get_ssd_values()
         AdditionalFunctions.select_item_from_list(ssd_conf_list, num_ssd)
-        LOG.debug("Select SSD number.")
+        GOOGLE_LOG.debug("Select SSD number.")
 
 
     # Datacenter -----------------------------------------------------------------------------------------------------
@@ -263,7 +264,7 @@ class GeneralPage(BasePage):
         self.get_datacenter().click()
         dc_conf_list = self.get_datacenter_values()
         AdditionalFunctions.select_item_from_list(dc_conf_list, location)
-        LOG.debug("Select Datacenter location.")
+        GOOGLE_LOG.debug("Select Datacenter location.")
 
 
     # Commited usage -------------------------------------------------------------------------------------------------
@@ -279,7 +280,7 @@ class GeneralPage(BasePage):
         self.get_com_usage().click()
         com_usage_list = self.get_com_usage_values()
         AdditionalFunctions.select_item_from_list(com_usage_list, com_usage)
-        LOG.debug("Select Committed usage.")
+        GOOGLE_LOG.debug("Select Committed usage.")
 
 
     # Estimate btn ---------------------------------------------------------------------------------------------------
@@ -289,7 +290,7 @@ class GeneralPage(BasePage):
 
     def estimate_btn_click(self):
         self.get_estimate().click()
-        LOG.debug("Click on Estimate btn.")
+        GOOGLE_LOG.debug("Click on Estimate btn.")
 
 
     # Filling the form with previous methods (WITHOUT SENDING EMAIL) ------------------------------------------------
@@ -325,7 +326,7 @@ class GeneralPage(BasePage):
 
     def email_estimate_btn_click(self):
         self.get_email_estimate_btn().click()
-        LOG.debug("Click on Email estimate.")
+        GOOGLE_LOG.debug("Click on Email estimate.")
 
 
     # Email field ----------------------------------------------------------------------------------------------------
@@ -336,7 +337,7 @@ class GeneralPage(BasePage):
     def set_email_field(self, email):
         self.get_email_field().click()
         self.get_email_field().send_keys(email)
-        LOG.debug("Set Email field value.")
+        GOOGLE_LOG.debug("Set Email field value.")
 
 
     # Send email btn -------------------------------------------------------------------------------------------------
@@ -346,7 +347,7 @@ class GeneralPage(BasePage):
 
     def send_email_btn_click(self):
         self.get_send_email_btn().click()
-        LOG.debug("Click on Send Email btn.")
+        GOOGLE_LOG.debug("Click on Send Email btn.")
 
 
     # Send email with the cost calculation ---------------------------------------------------------------------------
@@ -354,90 +355,90 @@ class GeneralPage(BasePage):
         self.enter_both_iframes(self.EXTERNAL_IFRAME, self.INNER_IFRAME)
         self.set_email_field(email)
         self.send_email_btn_click()
-        LOG.debug("Email successfuly send.")
+        GOOGLE_LOG.debug("Email successfuly send.")
 
 
     # CALC ASSERTIONS METHODS ---------------------------------------------------------------------------------------------
     def get_page_title(self):
         title = self.driver.title
-        LOG.info("Get page title for assertion.")
+        GOOGLE_LOG.info("Get page title for assertion.")
         
         return title
 
 
     def get_estimate_sum(self):
         sum = self.wait_until_presence_of_element_located(By.XPATH, self.ESTIMATE_SUM)
-        LOG.info("Get sum for assertion.")
+        GOOGLE_LOG.info("Get sum for assertion.")
         
         return sum.text[0:8]
 
 
     def get_estimate_instances(self):
         instances = self.wait_until_presence_of_element_located(By.XPATH, self.ESTIMATE_INSTANCES)
-        LOG.info("Get instances for assertion.")
+        GOOGLE_LOG.info("Get instances for assertion.")
         
         return instances.text
 
 
     def get_estimate_os_software(self):
         os_soft = self.wait_until_presence_of_element_located(By.XPATH, self.ESTIMATE_OS_SOFTWARE)
-        LOG.info("Get os/software for assertion.")
+        GOOGLE_LOG.info("Get os/software for assertion.")
         
         return os_soft.text
 
 
     def get_estimate_instance_type(self):
         instance_type = self.wait_until_presence_of_element_located(By.XPATH, self.ESTIMATE_INSTANCE_TYPE)
-        LOG.info("Get instances type for assertion.")
+        GOOGLE_LOG.info("Get instances type for assertion.")
         
         return instance_type.text
 
 
     def get_estimate_ssd(self):
         ssd = self.wait_until_presence_of_element_located(By.XPATH, self.ESTIMATE_SSD)
-        LOG.info("Get SSD for assertion.")
+        GOOGLE_LOG.info("Get SSD for assertion.")
         
         return ssd.text
     
 
     def get_estimate_region(self):
         region = self.wait_until_presence_of_element_located(By.XPATH, self.ESTIMATE_REGION)
-        LOG.info("Get region for assertion.")
+        GOOGLE_LOG.info("Get region for assertion.")
         
         return region.text
 
 
     def get_estimate_term(self):
         term = self.wait_until_presence_of_element_located(By.XPATH, self.ESTIMATE_TERM)
-        LOG.info("Get term for assertion.")
+        GOOGLE_LOG.info("Get term for assertion.")
         
         return term.text
     
 
     def get_estimate_hours(self):
         hours = self.wait_until_presence_of_element_located(By.XPATH, self.ESTIMATE_HOURS)
-        LOG.info("Get hours for assertion.")
+        GOOGLE_LOG.info("Get hours for assertion.")
         
         return hours.text
 
 
     def get_estimate_prov_model(self):
         prov_model = self.wait_until_presence_of_element_located(By.XPATH, self.ESTIMATE_PROV_MODEL)
-        LOG.info("Get provision model for assertion.")
+        GOOGLE_LOG.info("Get provision model for assertion.")
         
         return prov_model.text
 
 
     def get_estimate_binding_sums(self):
         binding_sums = self.wait_for_presence_of_all_elements(By.XPATH, self.ESTIMATE_BINDING_SUMS)
-        LOG.info("Get binding sums for assertion.")
+        GOOGLE_LOG.info("Get binding sums for assertion.")
         
         return binding_sums[0].text
 
 
     def get_estimate_total(self):
         total = self.wait_until_presence_of_element_located(By.XPATH, self.ESTIMATE_TOTAL)
-        LOG.info("Get estimate total for assertion.")
+        GOOGLE_LOG.info("Get estimate total for assertion.")
         
         return total
     
@@ -457,7 +458,7 @@ class GeneralPage(BasePage):
     def copy_email_address(self):
         self.wait_until_next_page_open()
         email = self.get_email_address()
-        LOG.debug("Copy email.")
+        GOOGLE_LOG.debug("Copy email.")
         
         return email
 
@@ -469,12 +470,12 @@ class GeneralPage(BasePage):
 
     def letter_click(self):
         self.get_letter().click()
-        LOG.debug("Click on letter.")
+        GOOGLE_LOG.debug("Click on letter.")
 
 
     def open_letter(self):
         self.letter_click()
-        LOG.debug("Letter is opened.")
+        GOOGLE_LOG.debug("Letter is opened.")
 
 
     # Window handling ------------------------------------------------------------------------------------------------
@@ -493,7 +494,7 @@ class GeneralPage(BasePage):
     # Iframe handling ------------------------------------------------------------------------------------------------
     def enter_letter_iframe(self, iframe):
         self.switch_to_frame(iframe)
-        LOG.debug("Enter into letter iframe.")
+        GOOGLE_LOG.debug("Enter into letter iframe.")
 
 
     # Spam handling -------------------------------------------------------------------------------------------------- 
@@ -503,18 +504,18 @@ class GeneralPage(BasePage):
 
     def spam_close(self):
         self.switch_to_frame(self.SPAM_MAIN_IFRAME)
-        LOG.debug("Enter into external mail iframe.")
+        GOOGLE_LOG.debug("Enter into external mail iframe.")
         self.switch_to_frame(self.SPAM_NEXT_IFRAME) 
-        LOG.debug("Enter into inner mail iframe.")
+        GOOGLE_LOG.debug("Enter into inner mail iframe.")
         self.spam_box_close().click()
         self.get_out_of_frames()
-        LOG.debug("Spam closed.")
+        GOOGLE_LOG.debug("Spam closed.")
 
 
     # Sum ------------------------------------------------------------------------------------------------------------
     def get_sum(self):
         sum = self.wait_until_presence_of_element_located(By.XPATH, self.SUM)
-        LOG.info("Get sum to assert.")
+        GOOGLE_LOG.info("Get sum to assert.")
         
         return sum.text
 
