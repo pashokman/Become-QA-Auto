@@ -54,6 +54,7 @@ Every folder consists from one-few modules in each one I make tests of some func
         - add external answer to asserts,
         - training to uses external module function (AdditionalFunctions.select_item_from_list),
         - add Allure severity to tests,
+        - add screenshots on failure in Allure report.
 * run tests in Jenkins
     + added "result_jenkins.png" to project root folder (some UI tests fail in Jenkins, but succeed on local machine)
 * setup Allure reporter

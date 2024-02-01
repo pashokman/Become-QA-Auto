@@ -46,6 +46,8 @@ def test_find_google_calculator(google_cloud):
 @allure.severity(allure.severity_level.NORMAL)
 @pytest.mark.google_calc
 def test_cloud_service_price(google_calc):
+    google_calc.fill_the_calc_form(4,'free','n1','CP-COMPUTEENGINE-VMIMAGE-N1-STANDARD-8',
+                                'NVIDIA_TESLA_V100','1','2','europe-west3','1')
     assert EXPECTED_DATA["instances"] == google_calc.get_estimate_instances(), "Instances is not as expected."
     assert EXPECTED_DATA["os_software"] == google_calc.get_estimate_os_software(), "OS/Software is not as expected."
     assert EXPECTED_DATA["instance_type"] in google_calc.get_estimate_instance_type(), "Instance type is not as expected."
@@ -61,6 +63,8 @@ def test_cloud_service_price(google_calc):
 @allure.severity(allure.severity_level.NORMAL)
 @pytest.mark.google_calc
 def test_cloud_service_price_on_email(google_calc):
+    google_calc.fill_the_calc_form(4,'free','n1','CP-COMPUTEENGINE-VMIMAGE-N1-STANDARD-8',
+                            'NVIDIA_TESLA_V100','1','2','europe-west3','1')
     google_calc.email_estimate_btn_click()
     main_window_handler = google_calc.get_current_window_handle()
 

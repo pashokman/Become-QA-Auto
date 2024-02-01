@@ -1,4 +1,5 @@
 import pytest
+import datetime
 
 # API modules --------------------------------------------------------------------------------------------------------
 from modules.api.clients.github import GitHub
@@ -16,6 +17,10 @@ from modules.ui.page_objects.study1.herokuapp_page import HerokuAppPage
 
 # study2
 from modules.ui.page_objects.study2.general_page import GeneralPage
+
+# Allure reports, screenshots ----------------------------------------------------------------------------------------
+import allure
+from allure_commons.types import AttachmentType
 
 
 class User:
@@ -103,27 +108,45 @@ def herokuapp():
 
 # UI study2 fixtures -------------------------------------------------------------------------------------------------
 @pytest.fixture()
-def google_cloud():
+def google_cloud(request):
     general_page = GeneralPage()
     general_page.go_to(general_page.CLOUD_URL)
 
     yield general_page
 
+    screenshot_on_failure(request, general_page)
     general_page.close()
 
 
 @pytest.fixture()
-def google_calc():
+def google_calc(request):
     general_page = GeneralPage()
     general_page.go_to(general_page.CALC_URL)
-    general_page.fill_the_calc_form(4,'free','n1','CP-COMPUTEENGINE-VMIMAGE-N1-STANDARD-8',
-                                    'NVIDIA_TESLA_V100','1','2','europe-west3','1')
 
     yield general_page
 
+    screenshot_on_failure(request, general_page)
     general_page.close()
 
 
 # HTML report configuration ------------------------------------------------------------------------------------------
 def pytest_html_report_title(report):
     report.title = "Testing project!"
+
+
+# Screenshots on fail ------------------------------------------------------------------------------------------------
+# also you need to add "screenshot_on_failure" method to the fixtures
+def screenshot_on_failure(request, page):
+    if request.node.rep_call.failed:
+        timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+        # Screenshot name in generated report
+        filename = f"failed_test_{timestamp}.png"
+        screenshot = page.driver.get_screenshot_as_png()
+        allure.attach(screenshot, name=filename, attachment_type=AttachmentType.PNG)
+
+@pytest.hookimpl(hookwrapper=True, tryfirst=True)
+def pytest_runtest_makereport(item, call):    
+    outcome = yield
+    rep = outcome.get_result()
+    setattr(item, "rep_" + rep.when, rep)
+    return rep
