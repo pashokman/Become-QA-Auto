@@ -8,7 +8,7 @@ Here I learned how to:
 """
 
 import pytest
-
+import allure
 
 SEARCH_VALUE = "Google Cloud Platform Pricing Calculator"
 
@@ -28,11 +28,13 @@ EXPECTED_DATA = {
 
 
 # Method that add additional info string in logs about start of testing this module. ---------------------------------
+@allure.severity(allure.severity_level.TRIVIAL)
 @pytest.mark.google_calc
 def test_start(google_cloud):
     google_cloud.start()
 
 
+@allure.severity(allure.severity_level.MINOR)
 @pytest.mark.google_calc
 def test_find_google_calculator(google_cloud):
     google_cloud.find_calculator(SEARCH_VALUE)
@@ -41,6 +43,7 @@ def test_find_google_calculator(google_cloud):
     assert EXPECTED_DATA["page_title"] == google_cloud.get_page_title(), "Does not find Google calc."
 
 
+@allure.severity(allure.severity_level.NORMAL)
 @pytest.mark.google_calc
 def test_cloud_service_price(google_calc):
     assert EXPECTED_DATA["instances"] == google_calc.get_estimate_instances(), "Instances is not as expected."
@@ -55,6 +58,7 @@ def test_cloud_service_price(google_calc):
     assert EXPECTED_DATA["total_sum"] == google_calc.get_estimate_sum(), "Total sum is not as expected."
 
 
+@allure.severity(allure.severity_level.NORMAL)
 @pytest.mark.google_calc
 def test_cloud_service_price_on_email(google_calc):
     google_calc.email_estimate_btn_click()
@@ -80,6 +84,7 @@ def test_cloud_service_price_on_email(google_calc):
 
 
 # Method that add additional info string in logs about end of testing this module. -----------------------------------
+@allure.severity(allure.severity_level.TRIVIAL)
 @pytest.mark.google_calc
 def test_end(google_cloud):
     google_cloud.end()

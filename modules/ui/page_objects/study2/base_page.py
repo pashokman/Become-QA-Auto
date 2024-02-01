@@ -1,11 +1,14 @@
 from selenium import webdriver
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
+import allure
+from allure_commons.types import AttachmentType
 
 
 class BasePage():
 
     def __init__(self):
+        global driver
         self.driver = webdriver.Chrome()
         self.driver.maximize_window()
 
@@ -66,6 +69,14 @@ class BasePage():
     def wait_until_next_page_open(self):
         wait = WebDriverWait(self.driver, 10)
         wait.until(EC.number_of_windows_to_be(2))
+
+
+    def make_screenshot(self, filename):
+        allure.attach(self.driver.get_screenshot_as_png(), name=f"{filename}", attachment_type=AttachmentType.PNG)
+
+
+    def switch_to_frame(self, iframe):
+        self.driver.switch_to.frame(iframe)
 
 
     # Close driver --------------------------------------------------------------------------------------------------

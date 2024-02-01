@@ -52,9 +52,12 @@ Every folder consists from one-few modules in each one I make tests of some func
         - switch iframes,
         - switch windows(browser tabs),
         - add external answer to asserts,
-        - training to uses external module function (AdditionalFunctions.select_item_from_list).
+        - training to uses external module function (AdditionalFunctions.select_item_from_list),
+        - add Allure severity to tests,
 * run tests in Jenkins
     + added "result_jenkins.png" to project root folder (some UI tests fail in Jenkins, but succeed on local machine)
+* setup Allure reporter
+    + added "result_allure.png" to project root folder
     
     ### UI TASK - test_estimate_calc.py
     1. Open https://cloud.google.com/.

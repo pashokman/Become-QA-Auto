@@ -6,6 +6,7 @@ from selenium.webdriver.chrome.options import Options
 class BasePage():
 
     def __init__(self):
+        global driver
         self.options = Options()
         self.options.page_load_strategy = 'eager'
         self.driver = webdriver.Chrome(options=self.options)

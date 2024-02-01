@@ -127,10 +127,6 @@ class GeneralPage(BasePage):
     
     ###### WORK WITH CALCUCATOR METHODS ------------------------------------------------------------------------------
     # Iframe handling ------------------------------------------------------------------------------------------------
-    def switch_to_frame(self, iframe):
-        self.driver.switch_to.frame(iframe)
-
-
     def enter_both_iframes(self, ext_iframe, int_iframe):
         self.switch_to_frame(ext_iframe)
         GOOGLE_LOG.debug("Enter into external  calc iframe.")
@@ -503,11 +499,18 @@ class GeneralPage(BasePage):
     
 
     def spam_close(self):
-        self.switch_to_frame(self.SPAM_MAIN_IFRAME)
-        GOOGLE_LOG.debug("Enter into external mail iframe.")
-        self.switch_to_frame(self.SPAM_NEXT_IFRAME) 
-        GOOGLE_LOG.debug("Enter into inner mail iframe.")
-        self.spam_box_close().click()
+        if self.wait_until_presence_of_element_located(By.ID, self.SPAM_MAIN_IFRAME):
+            self.switch_to_frame(self.SPAM_MAIN_IFRAME)
+            GOOGLE_LOG.debug("Enter into external mail iframe.")
+            if self.wait_until_presence_of_element_located(By.XPATH, self.SPAM_CLOSE_BTN):
+                self.spam_box_close().click()
+                GOOGLE_LOG.debug("Click on close button in external iframe.")
+            elif self.wait_until_presence_of_element_located(By.ID, self.SPAM_NEXT_IFRAME):
+                self.switch_to_frame(self.SPAM_NEXT_IFRAME) 
+                GOOGLE_LOG.debug("Enter into inner mail iframe.")
+                self.wait_until_presence_of_element_located(By.XPATH, self.SPAM_CLOSE_BTN)
+                self.spam_box_close().click()
+                GOOGLE_LOG.debug("Click on close button in inner iframe.")
         self.get_out_of_frames()
         GOOGLE_LOG.debug("Spam closed.")
 
@@ -518,6 +521,7 @@ class GeneralPage(BasePage):
         GOOGLE_LOG.info("Get sum to assert.")
         
         return sum.text
+
 
     def get_sum_in_letter(self):
         self.enter_letter_iframe(self.IFRAME)
