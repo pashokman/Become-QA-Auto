@@ -7,9 +7,16 @@ from allure_commons.types import AttachmentType
 
 class BasePage():
 
-    def __init__(self):
-        global driver
-        self.driver = webdriver.Chrome()
+    def __init__(self, browser = 'chrome'):
+        if browser.lower() == 'chrome':
+            self.driver = webdriver.Chrome()
+        elif browser.lower() == 'firefox':
+            self.driver = webdriver.Firefox()
+        elif browser.lower() == 'edge':
+            self.driver = webdriver.Edge()
+        else:
+            raise ValueError(f"Unsupported browser: {browser}")
+        
         self.driver.maximize_window()
 
 

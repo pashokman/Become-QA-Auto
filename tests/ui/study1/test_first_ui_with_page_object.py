@@ -1,8 +1,10 @@
 """ Here I learned how to use POM to the scenario from "test_first_ui.py". """
 
 import pytest
+import allure
 
 
+@allure.severity(allure.severity_level.NORMAL)
 @pytest.mark.first_ui
 def test_page_title(sign_in_page):
     # Open page
@@ -12,6 +14,7 @@ def test_page_title(sign_in_page):
     assert sign_in_page.get_title() == "Sign in to GitHub · GitHub", "First UI page title error"
 
 
+@allure.severity(allure.severity_level.NORMAL)
 @pytest.mark.first_ui
 def test_incorrect_username_and_password_error_message(sign_in_page):
     # Open page

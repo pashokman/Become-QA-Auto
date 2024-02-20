@@ -4,7 +4,9 @@ Here I learned how to:
     switch iframes,
     switch windows(browser tabs),
     add external answer to asserts,
-    training to uses external module function (AdditionalFunctions.select_item_from_list).
+    training to uses external module function (AdditionalFunctions.select_item_from_list);
+    add test severity for allure report
+    add testing in different browsers
 """
 
 import pytest

@@ -79,9 +79,23 @@ def database():
 
 
 # UI study1 fixtures -------------------------------------------------------------------------------------------------
+def pytest_addoption(parser):
+    parser.addoption("--browser-type", action="store", default="chrome", help="Browser to run tests")
+
+# To run tests in a specific browser should to run command: pytest --browser-type chrome
 @pytest.fixture
-def sign_in_page():
-    page = SignInPage()
+def browser_type(request):
+    return request.config.getoption("--browser-type")
+
+# To run tests in all 3 browsers need to run the command: pytest
+# @pytest.fixture(params=['chrome', 'firefox', 'edge'])
+# def browser_type(request):
+#     return request.param
+
+
+@pytest.fixture
+def sign_in_page(browser_type):
+    page = SignInPage(browser=browser_type)
 
     yield page
 
@@ -89,8 +103,8 @@ def sign_in_page():
 
 
 @pytest.fixture
-def uakinoclub():
-    page = UAKinoClubPage()
+def uakinoclub(browser_type):
+    page = UAKinoClubPage(browser=browser_type)
 
     yield page
 
@@ -98,8 +112,8 @@ def uakinoclub():
 
 
 @pytest.fixture
-def herokuapp():
-    page = HerokuAppPage()
+def herokuapp(browser_type):
+    page = HerokuAppPage(browser=browser_type)
 
     yield page
 
@@ -107,9 +121,9 @@ def herokuapp():
 
 
 # UI study2 fixtures -------------------------------------------------------------------------------------------------
-@pytest.fixture()
-def google_cloud(request):
-    general_page = GeneralPage()
+@pytest.fixture
+def google_cloud(request, browser_type):
+    general_page = GeneralPage(browser=browser_type)
     general_page.go_to(general_page.CLOUD_URL)
 
     yield general_page
@@ -118,9 +132,9 @@ def google_cloud(request):
     general_page.close()
 
 
-@pytest.fixture()
-def google_calc(request):
-    general_page = GeneralPage()
+@pytest.fixture
+def google_calc(request, browser_type):
+    general_page = GeneralPage(browser=browser_type)
     general_page.go_to(general_page.CALC_URL)
 
     yield general_page

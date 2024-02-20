@@ -6,15 +6,18 @@ Here I learned:
     - enter some value into a field; 
     - click on element; 
     - get text from an element;
-    - get page title.
+    - get page title;
+    - add testing in different browsers
 """
 
 import pytest
+import allure
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 
+@allure.severity(allure.severity_level.NORMAL)
 @pytest.mark.first_ui
 def test_check_incorrect_username():
     # Create an object for manage browser

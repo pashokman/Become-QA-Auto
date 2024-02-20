@@ -8,8 +8,8 @@ from modules.ui.page_objects.study1.base_page import BasePage
 class SignInPage(BasePage):
     URL = "https://github.com/login"
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, browser):
+        super().__init__(browser)
 
 
     def go_to(self):

@@ -10,8 +10,8 @@ HEROKU_APP_LOG = logger_instance.get_logger()
 class HerokuAppPage(BasePage):
     MAIN_URL = "https://the-internet.herokuapp.com/"
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, browser):
+        super().__init__(browser)
 
 
     # Methods that add additional info string in logs about start/end of testing this module. ------------------------

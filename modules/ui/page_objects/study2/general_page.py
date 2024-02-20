@@ -15,10 +15,11 @@ class GeneralPage(BasePage):
     ####### TEST BUILD ELEMENTS/CONSTANTS ----------------------------------------------------------------------------
     # Search calculator ----------------------------------------------------------------------------------------------
     CLOUD_URL = "https://cloud.google.com/"
+    SEARCH_BTN = "//div[@jsname='Ohx1pb']"
     SEARCH_FIELD = "//input[@placeholder='Search']"
 
     # Open calculator result -----------------------------------------------------------------------------------------
-    SEARCH_RESULT = "//div[@class='gs-title']//b[contains(text(),'Google Cloud Pricing Calculator')]"
+    SEARCH_RESULT = "//a[@track-metadata-eventdetail='cloud.google.com/products/calculator-legacy']"
 
     # Work with calculator -------------------------------------------------------------------------------------------
     CALC_URL = "https://cloud.google.com/products/calculator-legacy"
@@ -75,8 +76,8 @@ class GeneralPage(BasePage):
     SUM = "//td[2]//h3"
 
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, browser):
+        super().__init__(browser)
 
 
     # Methods that add additional info string in logs about start/end of testing this module. ------------------------    
@@ -95,12 +96,16 @@ class GeneralPage(BasePage):
         return super().go_to(url)
 
 
+    def get_search_button(self):
+        return self.wait_until_element_is_clicable(By.XPATH, self.SEARCH_BTN)
+    
+
     def get_search_field(self):
-        return self.wait_until_element_is_clicable(By.XPATH, self.SEARCH_FIELD)
+        return self.wait_until_element_is_clicable(By.XPATH, self.SEARCH_FIELD)    
 
 
     def click_on_search_field(self):
-        self.get_search_field().click()
+        self.get_search_button().click()
 
 
     def enter_search_value(self, searched_value):

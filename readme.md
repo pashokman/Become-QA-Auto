@@ -93,8 +93,8 @@ Every folder consists from one-few modules in each one I make tests of some func
 * To run all test need to use command:
     + '''python -m pytest'''
 
-* To run some type of tests need to use command (mark names you can select in pytest.ini file, example - python -m pytest -m api): 
-    + '''python -m pytest -m <mark name>'''
+* To run some type of tests need to use command (mark names you can select in pytest.ini file, example - "python -m pytest -m api", to use few markers "api or api2"): 
+    + '''python -m pytest -m mark_name'''
 
 * To run test in paralel need to use command (need to be installed "pytest-xdist" module):
     + '''python -m pytest -n 4'''
@@ -117,3 +117,13 @@ Every folder consists from one-few modules in each one I make tests of some func
 
 * To make JUnitXML report:
     + '''python -m pytest -m pokemon_api --junit-xml=report2.xml'''
+
+* To make Allure report:
+    + '''python -m pytest -m pokemon_api --alluredir="./reports"'''
+    + from project root folder open cmd and run command '''allure serve "./reports"'''
+
+* To run tests in all browsers should uncomment browser_type fixture with params and comment fixture without params (works only for google_calc tests):
+    + '''python -m pytest -m google_calc"'''
+
+* To run tests only in one of 3 browsers, should uncomment browser_type fixture without params and comment fixture with params (works only for google_calc tests):
+    + '''python -m pytest -m google_calc --browser-type edge --alluredir="./reports""'''

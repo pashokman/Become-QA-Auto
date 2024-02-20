@@ -1,10 +1,12 @@
 """
 Here I figure out how to:
     - check existing of an element;
-    - drag and drop element and check their position.
+    - drag and drop element and check their position;
+    - add testing in different browsers
 """
 
 import pytest
+import allure
 
 
 # Constants (input data and expected results data) -------------------------------------------------------------------
@@ -21,11 +23,13 @@ SECOND_ELEMENT_TEXT = "B"
 
 # Tests --------------------------------------------------------------------------------------------------------------
 # Method that add additional info string in logs about start of testing this module. ---------------------------------
+@allure.severity(allure.severity_level.TRIVIAL)
 @pytest.mark.herokuapp_ui
 def test_start(herokuapp):
     herokuapp.start()
 
 
+@allure.severity(allure.severity_level.NORMAL)
 @pytest.mark.herokuapp_ui
 def test_element_not_added(herokuapp):
     herokuapp.go_to_add_remove_elem_page()
@@ -34,6 +38,7 @@ def test_element_not_added(herokuapp):
     assert herokuapp.get_added_elements_count() == NONE_ELEMENTS_ADDED, "No element added test error"
 
 
+@allure.severity(allure.severity_level.NORMAL)
 @pytest.mark.herokuapp_ui
 def test_one_element_added(herokuapp):
     herokuapp.go_to_add_remove_elem_page()
@@ -42,6 +47,7 @@ def test_one_element_added(herokuapp):
     assert herokuapp.get_added_elements_count() == ONE_ELEMENT_ADDED, "One element added test error"
 
 
+@allure.severity(allure.severity_level.NORMAL)
 @pytest.mark.herokuapp_ui
 def test_two_elements_added(herokuapp):
     herokuapp.go_to_add_remove_elem_page()
@@ -50,6 +56,7 @@ def test_two_elements_added(herokuapp):
     assert herokuapp.get_added_elements_count() == TWO_ELEMENTS_ADDED, "Two element added test error"
 
 
+@allure.severity(allure.severity_level.NORMAL)
 @pytest.mark.herokuapp_ui
 def test_delete_one_of_two_added_elem(herokuapp):
     herokuapp.go_to_add_remove_elem_page()
@@ -59,6 +66,7 @@ def test_delete_one_of_two_added_elem(herokuapp):
     assert herokuapp.get_added_elements_count() == EXPECTED_ELEMENTS_COUNT_AFTER_DELETING, "Delete one of two elements test error"
 
 
+@allure.severity(allure.severity_level.NORMAL)
 @pytest.mark.herokuapp_ui
 def test_elem_text_before_drag_and_drop(herokuapp):
     herokuapp.go_to_drag_and_drop_page()
@@ -69,6 +77,7 @@ def test_elem_text_before_drag_and_drop(herokuapp):
     assert (first_element_text == FIRST_ELEMENT_TEXT and second_element_text == SECOND_ELEMENT_TEXT), "Before drug and drop test error"
 
 
+@allure.severity(allure.severity_level.NORMAL)
 @pytest.mark.herokuapp_ui
 def test_elem_text_after_drag_and_drop(herokuapp):
     herokuapp.go_to_drag_and_drop_page()
@@ -81,6 +90,7 @@ def test_elem_text_after_drag_and_drop(herokuapp):
 
 
 # Method that add additional info string in logs about end of testing this module. -----------------------------------
+@allure.severity(allure.severity_level.TRIVIAL)
 @pytest.mark.herokuapp_ui
 def test_end(herokuapp):
     herokuapp.end()

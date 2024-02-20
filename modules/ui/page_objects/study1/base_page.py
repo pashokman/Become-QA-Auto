@@ -1,15 +1,26 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.wait import WebDriverWait
 
 
 class BasePage():
 
-    def __init__(self):
-        global driver
-        self.options = Options()
-        self.options.page_load_strategy = 'eager'
-        self.driver = webdriver.Chrome(options=self.options)
+    def __init__(self, browser = 'chrome'):
+        
+        if browser.lower() == 'chrome':
+            self.options = Options()
+            # eager - need to work vs page content as soon as possible, before all page loaded
+            self.options.page_load_strategy = 'eager'
+            self.driver = webdriver.Chrome(options=self.options)
+        elif browser.lower() == 'firefox':
+            self.driver = webdriver.Firefox()
+        elif browser.lower() == 'edge':
+            self.driver = webdriver.Edge()
+        else:
+            raise ValueError(f"Unsupported browser: {browser}")
+
         self.driver.maximize_window()
         
         
@@ -45,6 +56,13 @@ class BasePage():
         js_code = "arguments[0].scrollIntoView(true)"
         self.driver.execute_script(js_code, element)
 
+
+    # Wait for all list elements
+    def wait_for_presence_of_all_elements(self, locator_type, locator):
+        wait = WebDriverWait(self.driver, 10)
+        list_of_elements = wait.until(EC.presence_of_all_elements_located((locator_type, locator)))
+        
+        return list_of_elements
 
     # Close driver --------------------------------------------------------------------------------------------------
     def close(self):

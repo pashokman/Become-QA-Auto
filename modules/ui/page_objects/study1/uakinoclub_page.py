@@ -6,6 +6,7 @@ making complex methods, like "search_some_movie" for a DRY (don't repeat yoursel
 """
 
 from modules.ui.page_objects.study1.base_page import BasePage
+from selenium.webdriver.common.by import By
 from utils.logger import Logger
 
 
@@ -17,8 +18,8 @@ class UAKinoClubPage(BasePage):
     MAIN_URL = 'https://uakino.club/'
 
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, browser):
+        super().__init__(browser)
 
 
     # Methods that add additional info string in logs about start/end of testing this module. ------------------------    
@@ -83,7 +84,8 @@ class UAKinoClubPage(BasePage):
 
 
     def save_relative_movies_years(self):
-        relative_movies_years = self.find_elements_by_xpath("//div[@class='rel-item']//div[@class='related-date']")
+        relative_movies_years = self.wait_for_presence_of_all_elements(
+            By.XPATH, "//div[@class='rel-item']//div[@class='related-date']")
         text_relative_movies_years = []
         for i in range(len(relative_movies_years)):
             text_relative_movies_years.append(relative_movies_years[i].text)

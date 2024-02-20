@@ -1,10 +1,12 @@
 """
 Hear I learned:
     - how to work with multiple elements;
-    - how to use DRY (don't repeat yourself) practise - method "search_some_movie".
+    - how to use DRY (don't repeat yourself) practise - method "search_some_movie";
+    - add testing in different browsers
 """
 
 import pytest
+import allure
 
 
 # Constants (input data and expected results data) -------------------------------------------------------------------
@@ -31,11 +33,13 @@ EXPECTED_THIRD_RELATIVE_MOVIE_YEAR = "(2006 рік)"
 
 # Tests --------------------------------------------------------------------------------------------------------------
 # Method that add additional info string in logs about start of testing this module. ---------------------------------
+@allure.severity(allure.severity_level.TRIVIAL)
 @pytest.mark.uakinoclub_ui
 def test_start(uakinoclub):
     uakinoclub.start()
 
 
+@allure.severity(allure.severity_level.MINOR)
 @pytest.mark.uakinoclub_ui
 def test_non_existing_movie_search_message(uakinoclub):
     uakinoclub.search_some_movie(NONE_EXISTING_MOVIE_NAME)
@@ -43,6 +47,7 @@ def test_non_existing_movie_search_message(uakinoclub):
     assert uakinoclub.get_movie_message() == NONE_EXISTING_MOVIE_MESSAGE, "Non existing movie message test error"
 
 
+@allure.severity(allure.severity_level.MINOR)
 @pytest.mark.uakinoclub_ui
 def test_existing_movie_search_message(uakinoclub):
     uakinoclub.search_some_movie(EXISTING_MOVIE_SEARCH_NAME)
@@ -50,6 +55,7 @@ def test_existing_movie_search_message(uakinoclub):
     assert uakinoclub.get_movie_message() == EXISTING_MOVIE_MESSAGE, "Existing movie meessage test error"
 
 
+@allure.severity(allure.severity_level.NORMAL)
 @pytest.mark.uakinoclub_ui
 def test_search_results_count_validation(uakinoclub):
     uakinoclub.search_some_movie(EXISTING_MOVIE_SEARCH_NAME)
@@ -58,6 +64,7 @@ def test_search_results_count_validation(uakinoclub):
     assert len(result_movie_count) == EXISTING_MOVIE_COUNT, "Search results count validation test error"
 
 
+@allure.severity(allure.severity_level.NORMAL)
 @pytest.mark.uakinoclub_ui
 def test_first_search_result_validation(uakinoclub):
     uakinoclub.search_some_movie(EXISTING_MOVIE_SEARCH_NAME)
@@ -66,6 +73,7 @@ def test_first_search_result_validation(uakinoclub):
     assert uakinoclub.get_movie_name() == EXPECTED_SEARCHED_MOVIE_NAME, "First search result validation test error"
 
 
+@allure.severity(allure.severity_level.NORMAL)
 @pytest.mark.uakinoclub_ui
 def test_first_searched_result_relative_movies(uakinoclub):
     uakinoclub.search_some_movie(EXISTING_MOVIE_SEARCH_NAME)
@@ -74,6 +82,7 @@ def test_first_searched_result_relative_movies(uakinoclub):
     assert uakinoclub.get_relative_movies() == EXPECTED_RELATIVE_MOVIES, "First search result relative movies test error"
 
 
+@allure.severity(allure.severity_level.NORMAL)
 @pytest.mark.uakinoclub_ui
 def test_second_related_movie_year(uakinoclub):
     uakinoclub.search_some_movie(EXISTING_MOVIE_SEARCH_NAME)
@@ -84,6 +93,7 @@ def test_second_related_movie_year(uakinoclub):
     assert years_list[1] == EXPECTED_SECOND_RELATIVE_MOVIE_YEAR, "Second related movie year test error"
 
 
+@allure.severity(allure.severity_level.NORMAL)
 @pytest.mark.uakinoclub_ui
 def test_third_related_movie_year(uakinoclub):
     uakinoclub.search_some_movie(EXISTING_MOVIE_SEARCH_NAME)
@@ -95,6 +105,7 @@ def test_third_related_movie_year(uakinoclub):
 
 
 # Method that add additional info string in logs about end of testing this module. -----------------------------------
+@allure.severity(allure.severity_level.TRIVIAL)
 @pytest.mark.uakinoclub_ui
 def test_end(uakinoclub):
     uakinoclub.end()
