@@ -144,8 +144,9 @@ def google_calc(request, browser_type):
 
 
 # HTML report configuration ------------------------------------------------------------------------------------------
-def pytest_html_report_title(report):
-    report.title = "Testing project!"
+# Maby broke the tests in Jenkins try to run without it
+# def pytest_html_report_title(report):
+#     report.title = "Testing project!"
 
 
 # Screenshots on fail ------------------------------------------------------------------------------------------------
