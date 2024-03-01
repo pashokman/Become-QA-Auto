@@ -67,7 +67,7 @@ class BasePage():
 
 
     def wait_until_presence_of_element_located(self, locator_type, locator):
-        wait = WebDriverWait(self.driver, 15)
+        wait = WebDriverWait(self.driver, 20)
         element = wait.until(EC.presence_of_element_located((locator_type, locator)))
         
         return element
