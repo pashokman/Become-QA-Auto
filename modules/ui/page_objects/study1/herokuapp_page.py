@@ -8,6 +8,7 @@ HEROKU_APP_LOG = logger_instance.get_logger()
 
 
 class HerokuAppPage(BasePage):
+    
     MAIN_URL = "https://the-internet.herokuapp.com/"
 
     def __init__(self, browser):

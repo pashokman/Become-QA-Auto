@@ -12,16 +12,17 @@ GOOGLE_LOG = logger_instance.get_logger()
 
 
 class GeneralPage(BasePage):
+
     ####### TEST BUILD ELEMENTS/CONSTANTS ----------------------------------------------------------------------------
     # Search calculator ----------------------------------------------------------------------------------------------
     CLOUD_URL = "https://cloud.google.com/"
     SEARCH_BTN = "//div[@jsname='Ohx1pb']"
     SEARCH_FIELD = "//input[@placeholder='Search']"
 
-    # Open calculator result -----------------------------------------------------------------------------------------
+    # Open search result ---------------------------------------------------------------------------------------------
     SEARCH_RESULT = "//a[@track-metadata-eventdetail='cloud.google.com/products/calculator-legacy']"
 
-    # Work with calculator -------------------------------------------------------------------------------------------
+    # Work with calculator elements ----------------------------------------------------------------------------------
     CALC_URL = "https://cloud.google.com/products/calculator-legacy"
     EXTERNAL_IFRAME = 0
     INNER_IFRAME = "myFrame"
@@ -295,18 +296,9 @@ class GeneralPage(BasePage):
 
 
     # Filling the form with previous methods (WITHOUT SENDING EMAIL) ------------------------------------------------
-    def fill_the_calc_form(
-        self,
-        instances,
-        os_software,
-        series,
-        machine_type,
-        gpus_type,
-        num_gpus,
-        num_ssd,
-        location,
-        com_usage,
-    ):
+    def fill_the_calc_form(self, instances, os_software, series, machine_type,
+                           gpus_type, num_gpus, num_ssd, location, com_usage):
+
         self.enter_both_iframes(self.EXTERNAL_IFRAME, self.INNER_IFRAME)
         self.click_on_compute_engine_btn()
         self.set_instances_value(instances)

@@ -63,7 +63,8 @@ def test_delete_one_of_two_added_elem(herokuapp):
     herokuapp.click_add_elem_times(2)
     herokuapp.click_del_elem_times(1)
 
-    assert herokuapp.get_added_elements_count() == EXPECTED_ELEMENTS_COUNT_AFTER_DELETING, "Delete one of two elements test error"
+    err_message = "Delete one of two elements test error"
+    assert herokuapp.get_added_elements_count() == EXPECTED_ELEMENTS_COUNT_AFTER_DELETING, err_message
 
 
 @allure.severity(allure.severity_level.NORMAL)
@@ -74,7 +75,8 @@ def test_elem_text_before_drag_and_drop(herokuapp):
     first_element_text = elem_list_before_drag_and_drop[0].text
     second_element_text = elem_list_before_drag_and_drop[1].text
 
-    assert (first_element_text == FIRST_ELEMENT_TEXT and second_element_text == SECOND_ELEMENT_TEXT), "Before drug and drop test error"
+    err_message = "Before drug and drop test error"
+    assert (first_element_text == FIRST_ELEMENT_TEXT and second_element_text == SECOND_ELEMENT_TEXT), err_message
 
 
 @allure.severity(allure.severity_level.NORMAL)
@@ -86,7 +88,8 @@ def test_elem_text_after_drag_and_drop(herokuapp):
     first_element_text = elem_list_before_drag_and_drop[0].text
     second_element_text = elem_list_before_drag_and_drop[1].text
 
-    assert first_element_text == SECOND_ELEMENT_TEXT and second_element_text == FIRST_ELEMENT_TEXT, "After drug and drop test error"
+    err_message = "After drug and drop test error"
+    assert first_element_text == SECOND_ELEMENT_TEXT and second_element_text == FIRST_ELEMENT_TEXT, err_message
 
 
 # Method that add additional info string in logs about end of testing this module. -----------------------------------

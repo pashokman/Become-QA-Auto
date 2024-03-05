@@ -15,6 +15,7 @@ UA_KINOCLUB_LOG = logger_instance.get_logger()
 
 
 class UAKinoClubPage(BasePage):
+    
     MAIN_URL = 'https://uakino.club/'
 
 

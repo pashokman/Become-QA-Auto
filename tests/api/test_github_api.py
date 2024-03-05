@@ -15,14 +15,16 @@ def test_commit_list_not_empty(github_api):
 def test_first_commit_author_name(github_api):
     commit_list = github_api.get_commit_list()
 
-    assert commit_list[0]['commit']['author']['name'] == 'Pavlo Lekhitskyi', "First commit author name is not Pavlo Lekhitskyi"
+    err_message = 'First commit author name is not Pavlo Lekhitskyi'
+    assert commit_list[0]['commit']['author']['name'] == 'Pavlo Lekhitskyi', err_message
 
 
 @pytest.mark.git_hub_api
 def test_first_commit_author_email(github_api):
     commit_list = github_api.get_commit_list()
 
-    assert commit_list[0]['commit']['author']['email'] == 'pashokman1@gmail.com', "First commit email is not pashokman1@gmail.com"
+    err_message = 'First commit email is not pashokman1@gmail.com'
+    assert commit_list[0]['commit']['author']['email'] == 'pashokman1@gmail.com', err_message
 
 
 # Testing users ------------------------------------------------------------------------------------------------------
