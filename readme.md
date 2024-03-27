@@ -1,19 +1,19 @@
 # My degree project from course - Automation Software Testing by Prometheus and GlobalLogic
-In this framework I study to test API, UI, Database and it's separated properly in different folders.\
+In this framework I study to test API, UI, Database and it's separated properly in different folders.
 
 How I describe framework and what I tested:
 * ```<chapters name>``` of a framework
     + ```<tests name>``` - what I learned, working with the test (names of the tests I created and what I tested in API/Database/UI).
 
 ## Modules folder
-Consists from folders: ```api/clients```, ```common```, ```ui```.\
-Every folder consists from one-few modules in each one I describe classes and their methods to work with and use them in tests.
+Consists from folders: ```api/clients```, ```common```, ```ui```.  
+Every package consists from one-few modules in each one I describe classes and their methods to work with and use them in tests.
 
 
 ## Tests folder
 ### Tests are arranged in order of increasing complexity.
-Consists from, folders: ```api```, ```database```, ```ui```.\
-Every folder consists from one-few modules in each one I make tests of some functionality described below.
+Consists from, folders: ```api```, ```database```, ```ui```.  
+Every package consists from one-few modules in each one I make tests of some functionality described below.
 * ```api```
     + ```test_api``` - learned how to send API requests;
     + ```test_fixture``` - learned how to use fixtures in tests;
@@ -36,22 +36,22 @@ Every folder consists from one-few modules in each one I make tests of some func
 * ```database```
     + ```test_database``` - learned how to use methods JOIN, SUM, MAX, SELECT, INSERT, DELETE, UPDATE in database testing.
 * ```ui/page_objects```
-    + ```study1``` - folder with first steps in auto testing:
-        - ```test_first_ui``` - learned how to work with Selenium webdriver, open page, find element, enter some value into a field, click on element, get text from an element, get page title;
+    + ```study1``` - package with first steps in UI auto testing:
+        - ```test_first_ui``` - learned how to work with Selenium WebDriver, open page, find element, enter some value into a field, click on element, get text from an element, get page title;
         - ```test_first_ui_with_page_object``` - learned how to use POM to previous test (open page, enter login, password, click on Login btn, check error message, check page title);
-        - ```test_uakinoclub_ui``` - learned how to use POM to more difficult scenarious then previous, learned how to get elements selectors, getting multiple elements and saving them into a list and work with them, using DRY (don't repeat yourself) practice in tests (through class methods), assign the input and output data to constants.
+        - ```test_uakinoclub_ui``` - learned how to use POM to more difficult scenarious then previous, learned how to get elements selectors, getting multiple elements and saving them into a list and work with them, using DRY (don't repeat yourself) practice in tests (through class methods), assign the input and output data to constants, working with AJAX based website (should add option - ```self.options.page_load_strategy = 'eager'```);
         - ```test_herokuapp_ui``` - learned how to check existing of an element, figure out how to drag and drop element, and use practices from previous tests.
     + ```study2``` - forlder with more difficult automation scenario then all previous. It described delow.  
     Here I learned how to:
         - handle with waiters,
         - switch iframes,
-        - switch windows (browser tabs),
+        - switch windows (browsers tabs),
         - add external answer to asserts,
         - training how to uses external module functions (AdditionalFunctions.select_item_from_list),
         - add Allure severity to tests,
         - add screenshots on failure in Allure report.
 * ```run tests in Jenkins```
-    + added "allure_report_jenkins_git_hub" to project root folder (one test is broken in purpose)
+    + added "allure_report_jenkins_git_hub.png" to project root folder (one test is broken in purpose);
     + solve the problem when some UI tests fail in Jenkins, but succeed on local machine:
         - used GitHub project URL to get framework from it;
         - created virtual environment;
